@@ -1,5 +1,6 @@
-import BagIcon from '../../public/bagIcon'
-import Cart from './cartController'
+"use client"
+import BagIcon from './bagIcon'
+import CartControler from './cartControler' 
 import Logo from './logo'
 import SarchBar from './sarchBar'
 import { Saira } from 'next/font/google'
@@ -14,13 +15,13 @@ const saira = Saira({
 export default function Header() {
 
     return(
-        <header className="w-full h-20 flex items-center justify-between px-[160px] py-5">
+        <header className="w-full h-20 flex items-center justify-between px-[160px] py-5 shadow-md">
             <Logo/>
             <div className={`${saira.variable} font-serif flex items-center`}>
                 <SarchBar/>
                 <div className="flex">
                     <BagIcon/>
-                    <Cart/>
+                    <CartControler/>
                 </div>
             </div>
 

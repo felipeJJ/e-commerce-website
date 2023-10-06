@@ -1,4 +1,4 @@
-import SarchIcon from '../../public/sarchIcon'
+import SarchIcon from './sarchIcon'
 
 
 export default function SarchBar() {
