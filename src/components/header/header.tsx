@@ -15,7 +15,7 @@ const saira = Saira({
 export default function Header() {
 
     return(
-        <header className="w-full h-20 flex items-center justify-between px-[160px] py-5 shadow-md">
+        <header className="w-full h-20 mb-1 flex items-center justify-between px-[160px] py-5 shadow-md">
             <Logo/>
             <div className={`${saira.variable} font-serif flex items-center`}>
                 <SarchBar/>
