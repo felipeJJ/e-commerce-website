@@ -25,6 +25,8 @@ export default function ProductCard({ products }: ProductCardProps) {
                             src={product.imagens[1]}
                             alt="Product image"
                             style={{objectFit: "contain"}}
+                            sizes="(max-width: 300px) 100vw"
+
                         />
                     </div>
                     <div className={`${saira.variable} font-serif w-64 absolute`}>
