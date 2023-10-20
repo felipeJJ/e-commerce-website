@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import database from "../../../../database/lib/mongoose";
 import Produto from "../../../../database/schemas/produto";
 
-
 export async function GET(req: Request, res: Response) {
     await database.connectMongo();
     try {
@@ -16,8 +15,5 @@ export async function GET(req: Request, res: Response) {
         { message: "Error trying to load the products", error },
         { status: 500 }
       );
-    } finally {
-      database.disconnectMongo();
-    }
-  }
-  
+    } 
+}

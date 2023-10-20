@@ -6,3 +6,13 @@ export interface Products{
     imagens?: any;  
     categoria: any;
   }
+
+  export interface Category {
+    _id: string;
+    nomeCategoria: string;
+    categoriaPai?: {
+        _id: string;
+        nomeCategoria: string;
+    }
+  }
+  
