@@ -1,10 +1,14 @@
+'use client'
+
 import MainBody from "@/components/body/mainBody"
+import { FilterContextProvider } from "@/contexts/filterContext"
 
 export default function Home() {
   return(
-    <main>
-      <MainBody/>
-
-    </main>
+    <FilterContextProvider>
+      <main>
+        <MainBody/>
+      </main>
+    </FilterContextProvider>
   )
 }
