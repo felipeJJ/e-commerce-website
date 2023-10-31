@@ -4,6 +4,7 @@ import Line from "./lineDivider";
 import { Saira } from 'next/font/google';
 import { useFilterContext } from "@/contexts/filterContext";
 import { useOrganizerContext } from "@/contexts/organizerContext";
+import { useEffect } from "react";
 
 const saira = Saira({
     subsets: ['latin'],
@@ -17,25 +18,40 @@ interface ProductCardProps {
   }
 
 export default function ProductCard({ products }: ProductCardProps) {
-    const { selectedCategoryId } = useFilterContext()
-    const { organizer } = useOrganizerContext()
-
+    const { selectedCategoryId, page } = useFilterContext()
+    const { organizer, itemsPerPage, setProductCount } = useOrganizerContext()
+    
     const filteredProducts = selectedCategoryId === "all_products"
-        ? products
-        : products.filter(product => product.categoria == selectedCategoryId)
+    ? products 
+    : products.filter(product => product.categoria == selectedCategoryId)
     
     const sortedProducts = [...filteredProducts]
+    
+    const indexOfLastItem = page * itemsPerPage
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage
+    const currentItems = sortedProducts.slice(indexOfFirstItem, indexOfLastItem)
 
     if (organizer === "bigest") {
-        sortedProducts.sort((a, b) => b.preco - a.preco);
+        currentItems.sort((a, b) => b.preco - a.preco);
     } else if (organizer === "lowest") {
-        sortedProducts.sort((a, b) => a.preco - b.preco);
+        currentItems.sort((a, b) => a.preco - b.preco);
     } else if (organizer === "newest") {
-        sortedProducts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()); 
+        currentItems.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()); 
     }
+    
+    useEffect(() => {
+        if(selectedCategoryId === "all_products"){
+            const totalItems = products.length
+            setProductCount(Math.ceil(totalItems / itemsPerPage))
+        } else{
+            const totalItems = currentItems.length
+            setProductCount(Math.ceil(totalItems / itemsPerPage))
+        }
+    },  [currentItems.length, itemsPerPage, organizer, products.length, selectedCategoryId, setProductCount])
+
     return(
         <>
-            {sortedProducts.map((product) => (
+            {currentItems.map((product) => (
                 <section key={product._id} className="w-64 h-[408px] shadow-lg">
                     <div className="w-64 h-[300px] relative boder-2 border-red-300">
                         <Image

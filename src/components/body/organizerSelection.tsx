@@ -2,7 +2,7 @@ import { useOrganizerContext } from "@/contexts/organizerContext"
 import { ChangeEvent } from "react";
 
 export default function OrganizerSelection() {
-    const {  organizer, setOrganizer } = useOrganizerContext()
+    const { setOrganizer } = useOrganizerContext()
 
     function handleChange(e: ChangeEvent<HTMLSelectElement>) {
         const selectedOrganizer = e.target.value;
@@ -10,7 +10,7 @@ export default function OrganizerSelection() {
     }
 
     return(
-        <div className="flex items-center justify-end 2xl:mr-9 pb-6 ">
+        <div className="2xl:mr-9 mb-6 h-6 flex justify-end">
             <select onChange={handleChange} className=" outline-none" id="organizer">
                 <option value="">Organizar por</option>
                 <option value="newest">Novidades</option>

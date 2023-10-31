@@ -26,7 +26,7 @@ interface providerProps{
 
 export function FilterContextProvider({ children }: providerProps){
     const [search, setSearch] = useState("")
-    const [page, setPage] = useState(0)
+    const [page, setPage] = useState(1)
     const [categories, setCategories] = useState<CategoryResponse>({
         message: '',
         category: []
