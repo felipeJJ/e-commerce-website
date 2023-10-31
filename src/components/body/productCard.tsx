@@ -19,9 +19,7 @@ export default function ProductCard({ products }: ProductCardProps) {
     const { selectedCategoryId } = useFilterContext()
     const filteredProducts = selectedCategoryId === "all_products"
       ? products
-      : products.filter(product => product.categoria == selectedCategoryId);
-      console.log(selectedCategoryId)
-      console.log(products)
+      : products.filter(product => product.categoria == selectedCategoryId)
 
     return(
         <>
