@@ -1,11 +1,19 @@
 "use client"
 
 import FilterBar from "./filterBar";
-import ProductCard from "./productCard";
+import ProductCard from "./productCard"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Products } from "../../../types"
-import { useOrganizerContext } from "@/contexts/organizerContext";
+import { useOrganizerContext } from "@/contexts/organizerContext"
+import Pagination from "./pagination"
+import { Saira } from "next/font/google";
+
+const saira = Saira({
+    subsets: ['latin'],
+    weight:['400', '600'],
+    variable: '--font-saira',
+})
 
 export default function MainBody() {
   const { setProductCount, itemsPerPage } = useOrganizerContext()
@@ -20,11 +28,14 @@ export default function MainBody() {
   }, [setProductCount, itemsPerPage]);
   
   return (
-    <div className={`w-full h-full`}>
+    <div className={`${saira.variable} font-serif w-full h-full`}>
       <FilterBar/>
-      <section className="mx-40 pb-40 grid 2xl:grid-cols-5 grid-cols-4 gap-8">
-        <ProductCard products={products}/>
-      </section>
+      <div className="mx-40 pb-20 ">
+        <section className=" pb-16 grid 2xl:grid-cols-5 grid-cols-4 gap-8">
+          <ProductCard products={products}/>
+        </section>
+        <Pagination/>
+      </div>
     </div>
   );
 }
