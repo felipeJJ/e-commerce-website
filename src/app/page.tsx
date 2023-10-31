@@ -2,13 +2,16 @@
 
 import MainBody from "@/components/body/mainBody"
 import { FilterContextProvider } from "@/contexts/filterContext"
+import { OriganizerContextProvider } from "@/contexts/organizerContext"
 
 export default function Home() {
   return(
     <FilterContextProvider>
-      <main>
-        <MainBody/>
-      </main>
+      <OriganizerContextProvider>
+        <main>
+          <MainBody/>
+        </main>
+      </OriganizerContextProvider>
     </FilterContextProvider>
   )
 }

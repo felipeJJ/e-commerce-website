@@ -12,7 +12,7 @@ export default function FilterCategory() {
   }
 
   return (
-    <ul className="flex items-center justify-start gap-6 pt-9">
+    <ul className="flex items-center justify-start gap-6 pb-6">
         <button 
             className={`uppercase ${
                 selectedCategory === 'all_products' ? 'font-semibold border-b-4 border-[#FFA585]' : ''

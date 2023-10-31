@@ -5,6 +5,7 @@ export interface Products{
     preco: number;
     imagens?: any;  
     categoria: any;
+    createdAt: number;
   }
   export interface Category{
     _id: string;
