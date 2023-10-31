@@ -1,5 +1,5 @@
 import { useFilterContext } from "@/contexts/filterContext";
-import { Category } from "../../../types";
+import { Category } from "../../../../types";
 import { useState } from "react";
 
 export default function FilterCategory() {

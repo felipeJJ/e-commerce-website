@@ -1,12 +1,12 @@
 "use client"
 
-import FilterBar from "./filterBar";
+import FilterBar from "./filterBar/filterBar";
 import ProductCard from "./productCard"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Products } from "../../../types"
 import { useOrganizerContext } from "@/contexts/organizerContext"
-import Pagination from "./pagination"
+import Pagination from "./filterBar/pagination"
 import { Saira } from "next/font/google";
 
 const saira = Saira({
