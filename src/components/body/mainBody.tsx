@@ -18,7 +18,7 @@ export default function MainBody() {
   return (
     <div className="w-full h-full">
       <FilterBar/>
-      <section className="mx-40 pb-40 grid grid-cols-4 gap-8">
+      <section className="mx-40 pb-40 grid 2xl:grid-cols-5 grid-cols-4 gap-8">
         <ProductCard products={products}/>
       </section>
     </div>

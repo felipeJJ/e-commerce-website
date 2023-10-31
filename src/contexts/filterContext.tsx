@@ -9,10 +9,11 @@ const FilterContext = createContext ({
         message: '',
         category: []
       } as CategoryResponse,
+    selectedCategoryId: '',
     setSearch: (value: string) =>{},
     setPage: (value: number) =>{},
-    setCategories: (value: CategoryResponse) =>{}
-
+    setCategories: (value: CategoryResponse) =>{},
+    setSelectedCategoryId: (value: string) =>{},
 })
 
 export const useFilterContext = () => {
@@ -30,6 +31,7 @@ export function FilterContextProvider({ children }: providerProps){
         message: '',
         category: []
       });
+    const [selectedCategoryId, setSelectedCategoryId] = useState("all_products")
       
     useEffect(() => {
     axios.get('/api/getCategoriesApi').then(response =>{
@@ -38,7 +40,10 @@ export function FilterContextProvider({ children }: providerProps){
     }, []);
 
     return (
-        <FilterContext.Provider value={{search, page, categories, setSearch, setPage,setCategories}}>
+        <FilterContext.Provider value={{
+            search, page, categories, selectedCategoryId, 
+            setSearch, setPage,setCategories, setSelectedCategoryId}}
+        >
             {children}
         </FilterContext.Provider>
     )

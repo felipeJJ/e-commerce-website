@@ -2,6 +2,7 @@ import { Products } from "../../../types";
 import Image from "next/image";
 import Line from "./lineDivider";
 import { Saira } from 'next/font/google'
+import { useFilterContext } from "@/contexts/filterContext";
 
 const saira = Saira({
     subsets: ['latin'],
@@ -15,9 +16,16 @@ interface ProductCardProps {
   }
 
 export default function ProductCard({ products }: ProductCardProps) {
+    const { selectedCategoryId } = useFilterContext()
+    const filteredProducts = selectedCategoryId === "all_products"
+      ? products
+      : products.filter(product => product.categoria == selectedCategoryId);
+      console.log(selectedCategoryId)
+      console.log(products)
+
     return(
         <>
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
                 <section key={product._id} className="w-64 h-[408px] shadow-lg">
                     <div className="w-64 h-[300px] relative boder-2 border-red-300">
                         <Image
