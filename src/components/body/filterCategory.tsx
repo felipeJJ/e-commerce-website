@@ -18,7 +18,7 @@ export default function FilterCategory() {
     <ul className="flex items-center justify-start gap-6 pt-9">
         <button 
             className={`uppercase ${
-                selectedCategory === 'all_products' ? 'font-semibold' : ''
+                selectedCategory === 'all_products' ? 'font-semibold border-b-4 border-[#FFA585]' : ''
               }`}
             onClick={() => handleSelected('all_products')}
         >
@@ -28,7 +28,7 @@ export default function FilterCategory() {
         <button
           onClick={() => handleSelected(category._id)}
           className={`uppercase ${
-            selectedCategory === category._id ? 'font-semibold' : ''
+            selectedCategory === category._id ? 'font-semibold border-b-4 border-[#FFA585]' : ''
           }`}
           key={category._id}
         >
