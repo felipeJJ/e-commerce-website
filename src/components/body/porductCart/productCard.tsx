@@ -1,10 +1,12 @@
-import { Products } from "../../../types"
+import { Products } from "../../../../types"
 import Image from "next/image"
 import Line from "./lineDivider"
 import { Saira } from 'next/font/google'
 import { useFilterContext } from "@/contexts/filterContext"
 import { useOrganizerContext } from "@/contexts/organizerContext"
 import { useEffect } from "react"
+import CartIcon from "./cartIcon"
+import ButtonCart from "./buttonCart"
 
 const saira = Saira({
     subsets: ['latin'],
@@ -49,7 +51,7 @@ export default function ProductCard({ products }: ProductCardProps) {
             const totalItems = currentItems.length
             setProductCount(Math.ceil(totalItems / itemsPerPage))
         }
-    }, [currentItems.length, itemsPerPage, organizer, products.length, selectedCategoryId, setProductCount])
+    }, [currentItems.length, itemsPerPage, organizer, products.length, search, selectedCategoryId, setProductCount])
 
     useEffect(()=>{
         console.log(search)
@@ -57,7 +59,7 @@ export default function ProductCard({ products }: ProductCardProps) {
     return(
         <>
             {currentItems.map((product) => (
-                <section key={product._id} className="w-64 h-[408px] shadow-lg">
+                <section key={product._id} className="w-64 h-[410px] shadow-lg">
                     <div className="w-64 h-[300px] relative boder-2 border-red-300">
                         <Image
                             fill
@@ -71,16 +73,20 @@ export default function ProductCard({ products }: ProductCardProps) {
                         <div className=" flex justify-center mt-1">
                             <Line/>
                         </div>
-                        <p className=" my-2 mx-3 font-light">
+                        <p className={`my-2 mx-3 font-light`}>
                             {product.nome}
                         </p>
                         <div className=" flex justify-center">
                             <Line/>
                         </div>
-                        <p className=" my-2 mx-3 font-semibold">
-                            {`R$ ${product.preco},00`}
-                        </p>
+                        <div className={`flex justify-between h-14 w-64 ${product.nome.length < 29 ? 'mt-3' : ''} `}>
+                            <p className="my-2 mx-3 font-semibold">
+                                {`R$ ${product.preco},00`}
+                            </p>
+                            <ButtonCart/>
+                        </div>
                     </div>
+
                 </section>
             ))}
         </>
