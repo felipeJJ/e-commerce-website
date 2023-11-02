@@ -5,7 +5,6 @@ import { Saira } from 'next/font/google'
 import { useFilterContext } from "@/contexts/filterContext"
 import { useOrganizerContext } from "@/contexts/organizerContext"
 import { useEffect } from "react"
-import CartIcon from "./cartIcon"
 import ButtonCart from "./buttonCart"
 
 const saira = Saira({
@@ -83,7 +82,7 @@ export default function ProductCard({ products }: ProductCardProps) {
                             <p className="my-2 mx-3 font-semibold">
                                 {`R$ ${product.preco},00`}
                             </p>
-                            <ButtonCart/>
+                            <ButtonCart productId={product._id}/>
                         </div>
                     </div>
 

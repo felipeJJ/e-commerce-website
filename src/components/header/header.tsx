@@ -1,6 +1,6 @@
 "use client"
 import BagIcon from './bagIcon'
-import CartControler from './cartControler' 
+import CartControler from './cartController' 
 import Logo from './logo'
 import SarchBar from './sarchBar'
 import { Saira } from 'next/font/google'
