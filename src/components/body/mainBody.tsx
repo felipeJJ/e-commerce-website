@@ -1,7 +1,7 @@
 "use client"
 
 import FilterBar from "./filterBar/filterBar";
-import ProductCard from "./porductCart/productCard"
+import ProductCard from "./porductCard/productCard"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Products } from "../../../types"
