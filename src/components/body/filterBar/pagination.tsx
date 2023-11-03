@@ -1,33 +1,33 @@
-import { useEffect, useState } from "react";
-import { useFilterContext } from "@/contexts/filterContext";
-import { useOrganizerContext } from "@/contexts/organizerContext";
+import { useEffect, useState } from "react"
+import { useFilterContext } from "@/contexts/filterContext"
+import { useOrganizerContext } from "@/contexts/organizerContext"
 
 export default function Pagination() {
-  const { page, setPage } = useFilterContext();
-  const { productCount } = useOrganizerContext();
-  const [buttons, setButtons] = useState<number[]>([]);
+  const { page, setPage } = useFilterContext()
+  const { productCount } = useOrganizerContext()
+  const [buttons, setButtons] = useState<number[]>([])
 
   useEffect(() => {
-    const newButtons = Array.from({ length: productCount }, (_, index) => index + 1);
-    setButtons(newButtons);
-  }, [productCount]);
+    const newButtons = Array.from({ length: productCount }, (_, index) => index + 1)
+    setButtons(newButtons)
+  }, [productCount])
 
   function handleNextPage() {
-    setPage(page + 1);
+    setPage(page + 1)
   }
 
   function handlePrevPage() {
-    setPage(page - 1);
+    setPage(page - 1)
   }
 
   function handleNumPages(index: number) {
     if (index >= 0 && index < productCount) {
-      setPage(index + 1);
+      setPage(index + 1)
     }
   }
 
   return (
-    <div className="uppercase h-8 flex justify-end 2xl:mr-9">
+    <div className="uppercase h-8 flex justify-end">
       {buttons.map((index) => (
         <button
           key={index}
@@ -54,5 +54,5 @@ export default function Pagination() {
         {">"}
       </button>
     </div>
-  );
+  )
 }

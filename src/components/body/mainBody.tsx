@@ -1,13 +1,13 @@
 "use client"
 
-import FilterBar from "./filterBar/filterBar";
+import FilterBar from "./filterBar/filterBar"
 import ProductCard from "./porductCard/productCard"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Products } from "../../../types"
 import { useOrganizerContext } from "@/contexts/organizerContext"
 import Pagination from "./filterBar/pagination"
-import { Saira } from "next/font/google";
+import { Saira } from "next/font/google"
 
 const saira = Saira({
     subsets: ['latin'],
@@ -29,13 +29,15 @@ export default function MainBody() {
   
   return (
     <div className={`${saira.variable} font-serif w-full h-full`}>
-      <FilterBar/>
-      <div className="mx-40 pb-20 ">
-        <section className=" pb-16 grid 2xl:grid-cols-5 grid-cols-4 gap-8">
+      <div className="sm:mx-40 pb-20 max-w-fit mx-auto ">
+        <FilterBar/>
+        <section className="pb-16 grid 2xl:grid-cols-5 xl:grid-cols-4 
+          lg:grid-cols-3 md:grid-cols-2 2xl:gap-16 xl:gap-12 lg:gap-16 md:gap-40 gap-8"
+        >
           <ProductCard products={products}/>
         </section>
         <Pagination/>
       </div>
     </div>
-  );
+  )
 }

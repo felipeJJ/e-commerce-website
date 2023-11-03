@@ -15,16 +15,17 @@ const saira = Saira({
 export default function Header() {
 
     return(
-        <header className="w-full h-20 mb-1 flex items-center justify-between px-[160px] py-5 shadow-md">
+        <header className=" flex w-full h-20 mb-1 py-5 items-center justify-between 
+            md:px-[160px] shadow-md"
+        >
             <Logo/>
             <div className={`${saira.variable} font-serif flex items-center`}>
                 <SarchBar/>
-                <div className="flex">
+                <div className="flex ml-1 mr-3 sm:ml-4">
                     <BagIcon/>
                     <CartControler/>
                 </div>
             </div>
-
         </header>
     )
 }
