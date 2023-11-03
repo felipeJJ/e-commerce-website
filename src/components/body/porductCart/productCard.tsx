@@ -53,7 +53,6 @@ export default function ProductCard({ products }: ProductCardProps) {
     }, [currentItems.length, itemsPerPage, organizer, products.length, search, selectedCategoryId, setProductCount])
 
     useEffect(()=>{
-        console.log(search)
     },[search])
     return(
         <>
