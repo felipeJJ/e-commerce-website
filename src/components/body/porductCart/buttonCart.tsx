@@ -1,11 +1,12 @@
 import CartIcon from "./cartIcon"
-
+import { useFilterContext } from "@/contexts/filterContext" 
 
 interface ProductCardProps {
     productId: string
   }
 
 export default function ButtonCart({ productId }: ProductCardProps) {
+    const{ setCount, count } = useFilterContext()
 
     function handleCart(){
         let cartItems = localStorage.getItem('cart-items')
@@ -21,10 +22,13 @@ export default function ButtonCart({ productId }: ProductCardProps) {
             }
 
             localStorage.setItem('cart-items', JSON.stringify(cartItemsArray))
+            setCount(cartItemsArray.length)
         } else {
             const newCart = [{ productId, quantity: 1, id: productId }]
-            localStorage.setItem('cart-items', JSON.stringify(newCart));
+            localStorage.setItem('cart-items', JSON.stringify(newCart))
+            setCount(newCart.length)
         }
+        localStorage.setItem('count', JSON.stringify(count+1))
     }
 
   return (

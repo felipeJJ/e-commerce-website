@@ -10,6 +10,8 @@ const FilterContext = createContext ({
         category: []
       } as CategoryResponse,
     selectedCategoryId: '',
+    count: 0,
+    setCount:(value: number) =>{},
     setSearch: (value: string) =>{},
     setPage: (value: number) =>{},
     setCategories: (value: CategoryResponse) =>{},
@@ -32,6 +34,8 @@ export function FilterContextProvider({ children }: providerProps){
         category: []
       });
     const [selectedCategoryId, setSelectedCategoryId] = useState("all_products")
+    const [count, setCount] = useState(0)
+
       
     useEffect(() => {
     axios.get('/api/getCategoriesApi').then(response =>{
@@ -41,8 +45,8 @@ export function FilterContextProvider({ children }: providerProps){
 
     return (
         <FilterContext.Provider value={{
-            search, page, categories, selectedCategoryId, 
-            setSearch, setPage,setCategories, setSelectedCategoryId}}
+            search, page, categories, selectedCategoryId, count,
+            setCount, setSearch, setPage,setCategories, setSelectedCategoryId}}
         >
             {children}
         </FilterContext.Provider>
