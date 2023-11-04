@@ -34,8 +34,6 @@ export default function ProductCard() {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage
     const currentItems = sortedProducts.slice(indexOfFirstItem, indexOfLastItem)
 
-    console.log(currentItems)
-
     if (organizer === "bigest") {
         currentItems.sort((a, b) => b.preco - a.preco)
     } else if (organizer === "lowest") {
