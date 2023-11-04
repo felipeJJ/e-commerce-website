@@ -6,7 +6,7 @@ import { useCartContext } from "@/contexts/cartContext"
 import { useFilterContext } from "@/contexts/filterContext"
 import { useOrganizerContext } from "@/contexts/organizerContext"
 import { useEffect } from "react"
-import ButtonCart from "./buttonCart"
+import ButtonCart from "./cartButton"
 
 const saira = Saira({
     subsets: ['latin'],

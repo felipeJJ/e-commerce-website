@@ -5,7 +5,7 @@ interface ProductCardProps {
     productId: string
   }
 
-export default function ButtonCart({ productId }: ProductCardProps) {
+export default function CartButton({ productId }: ProductCardProps) {
     const{ setCount, count } = useCartContext()
 
     function handleCart(){
