@@ -3,6 +3,7 @@
 import './globals.css'
 import Header from '@/components/header/header'
 import { FilterContextProvider } from "@/contexts/filterContext"
+import { CartContextProvider } from '@/contexts/cartContext'
 
 
 export default function RootLayout({
@@ -13,10 +14,12 @@ export default function RootLayout({
   return (
     <html>
       <body>
-      <FilterContextProvider>
-        <Header></Header>
-        {children}
-      </FilterContextProvider>
+        <CartContextProvider>
+          <FilterContextProvider>
+            <Header></Header>
+            {children}
+          </FilterContextProvider>
+        </CartContextProvider>
       </body>
     </html>
   )

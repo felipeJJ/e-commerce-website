@@ -1,13 +1,9 @@
 "use client"
 
+import { Saira } from "next/font/google"
 import FilterBar from "./filterBar/filterBar"
 import ProductCard from "./porductCard/productCard"
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { Products } from "../../../types"
-import { useOrganizerContext } from "@/contexts/organizerContext"
 import Pagination from "./filterBar/pagination"
-import { Saira } from "next/font/google"
 
 const saira = Saira({
     subsets: ['latin'],
@@ -16,16 +12,6 @@ const saira = Saira({
 })
 
 export default function MainBody() {
-  const { setProductCount, itemsPerPage } = useOrganizerContext()
-  const [products, setProducts] = useState<Products[]>([])
-  
-  useEffect(() => {
-    axios.get('/api/getProductsApi').then(response => {
-      setProducts(response.data.produtos)
-      const totalItems = response.data.produtos.length
-      setProductCount(Math.ceil(totalItems / itemsPerPage))
-    })
-  }, [setProductCount, itemsPerPage]);
   
   return (
     <div className={`${saira.variable} font-serif w-full h-full`}>
@@ -34,7 +20,7 @@ export default function MainBody() {
         <section className="pb-16 grid 2xl:grid-cols-5 xl:grid-cols-4 
           lg:grid-cols-3 md:grid-cols-2 2xl:gap-16 xl:gap-12 lg:gap-16 md:gap-40 gap-8"
         >
-          <ProductCard products={products}/>
+          <ProductCard/>
         </section>
         <Pagination/>
       </div>

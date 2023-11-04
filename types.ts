@@ -19,3 +19,7 @@ export interface Products{
     message: string;
     category: []
   }
+  export interface ProductsResponse{
+    message: string;
+    produtos: []
+  }

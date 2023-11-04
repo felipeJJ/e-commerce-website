@@ -2,6 +2,7 @@ import { Products } from "../../../../types"
 import Image from "next/image"
 import Line from "./lineDivider"
 import { Saira } from 'next/font/google'
+import { useCartContext } from "@/contexts/cartContext"
 import { useFilterContext } from "@/contexts/filterContext"
 import { useOrganizerContext } from "@/contexts/organizerContext"
 import { useEffect } from "react"
@@ -13,26 +14,27 @@ const saira = Saira({
     variable: '--font-saira',
 })
 
-interface ProductCardProps {
-    products: Products[]
-  }
-
-export default function ProductCard({ products }: ProductCardProps) {
+export default function ProductCard() {
+    const  { products } = useCartContext()
     const { selectedCategoryId, page, search } = useFilterContext()
     const { organizer, itemsPerPage, setProductCount } = useOrganizerContext()
     
+    const prodctsArray: Products[] = products.produtos
+    
     const filteredProducts = selectedCategoryId === "all_products"
-    ? products.filter(product => product.nome.toLowerCase().includes(search.toLowerCase()))
-    : products.filter(product => 
+    ? prodctsArray.filter(product => product.nome.toLowerCase().includes(search.toLowerCase()))
+    : prodctsArray.filter(product => 
         product.categoria === selectedCategoryId && 
         product.nome.toLowerCase().includes(search.toLowerCase())
-      )
+    )
   
     const sortedProducts = [...filteredProducts]
     
     const indexOfLastItem = page * itemsPerPage
     const indexOfFirstItem = indexOfLastItem - itemsPerPage
     const currentItems = sortedProducts.slice(indexOfFirstItem, indexOfLastItem)
+
+    console.log(currentItems)
 
     if (organizer === "bigest") {
         currentItems.sort((a, b) => b.preco - a.preco)
@@ -44,16 +46,14 @@ export default function ProductCard({ products }: ProductCardProps) {
     
     useEffect(() => {
         if(selectedCategoryId === "all_products"){
-            const totalItems = products.length
+            const totalItems = prodctsArray.length
             setProductCount(Math.ceil(totalItems / itemsPerPage))
         } else{
             const totalItems = currentItems.length
             setProductCount(Math.ceil(totalItems / itemsPerPage))
         }
-    }, [currentItems.length, itemsPerPage, organizer, products.length, search, selectedCategoryId, setProductCount])
+    }, [currentItems.length, itemsPerPage, organizer, prodctsArray.length, search, selectedCategoryId, setProductCount])
 
-    useEffect(()=>{
-    },[search])
     return(
         <>
             {currentItems.map((product) => (

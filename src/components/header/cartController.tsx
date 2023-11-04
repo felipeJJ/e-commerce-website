@@ -1,8 +1,8 @@
-import { useFilterContext } from "@/contexts/filterContext" 
+import { useCartContext } from "@/contexts/cartContext"
 import { useEffect } from "react"
 
 export default function CartControler() {
-const { count, setCount } = useFilterContext()
+const { count, setCount } = useCartContext()
   
   useEffect(() => {
     let TemCount = Number(localStorage.getItem('count')) 

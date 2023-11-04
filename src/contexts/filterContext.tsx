@@ -1,6 +1,6 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from "react";
-import { CategoryResponse } from "../../types";
-import axios from "axios";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react"
+import { CategoryResponse } from "../../types"
+import axios from "axios"
 
 const FilterContext = createContext ({
     search: '',
@@ -10,8 +10,6 @@ const FilterContext = createContext ({
         category: []
       } as CategoryResponse,
     selectedCategoryId: '',
-    count: 0,
-    setCount:(value: number) =>{},
     setSearch: (value: string) =>{},
     setPage: (value: number) =>{},
     setCategories: (value: CategoryResponse) =>{},
@@ -19,8 +17,8 @@ const FilterContext = createContext ({
 })
 
 export const useFilterContext = () => {
-    return useContext(FilterContext);
-  };
+    return useContext(FilterContext)
+  }
 
 interface providerProps{
     children: ReactNode
@@ -34,19 +32,17 @@ export function FilterContextProvider({ children }: providerProps){
         category: []
       });
     const [selectedCategoryId, setSelectedCategoryId] = useState("all_products")
-    const [count, setCount] = useState(0)
-
       
     useEffect(() => {
     axios.get('/api/getCategoriesApi').then(response =>{
-        setCategories(response.data);
+        setCategories(response.data)
     })
-    }, []);
+    }, [])
 
     return (
         <FilterContext.Provider value={{
-            search, page, categories, selectedCategoryId, count,
-            setCount, setSearch, setPage,setCategories, setSelectedCategoryId}}
+            search, page, categories, selectedCategoryId,
+            setSearch, setPage,setCategories, setSelectedCategoryId}}
         >
             {children}
         </FilterContext.Provider>

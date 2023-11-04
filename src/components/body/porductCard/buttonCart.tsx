@@ -1,12 +1,12 @@
 import CartIcon from "./cartIcon"
-import { useFilterContext } from "@/contexts/filterContext" 
+import { useCartContext } from "@/contexts/cartContext" 
 
 interface ProductCardProps {
     productId: string
   }
 
 export default function ButtonCart({ productId }: ProductCardProps) {
-    const{ setCount, count } = useFilterContext()
+    const{ setCount, count } = useCartContext()
 
     function handleCart(){
         let cartItems = localStorage.getItem('cart-items')

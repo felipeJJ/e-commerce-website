@@ -1,26 +1,46 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
+import { ProductsResponse } from '../../types'
+import axios from 'axios'
+import { useOrganizerContext } from './organizerContext'
 
 const cartContext = createContext({
-    organizer: '',
-    setItemsPerPage: (value: number) =>{},
+    count: 0,
+    products: {
+        message: '',
+        produtos: []
+    } as ProductsResponse,
+    setProducts: (value: ProductsResponse) =>{},
+    setCount:(value: number) =>{},
+})
 
-});
-
-export const usecartContext = () => {
-    return useContext(cartContext);
+export const useCartContext = () => {
+    return useContext(cartContext)
 }
 
 interface providerProps{
     children: ReactNode
 }
 
-export function cartContextProvider({ children }: providerProps) {
-    const [organizer, setOrganizer] = useState('')
+export function CartContextProvider({ children }: providerProps) {
+    const { setProductCount, itemsPerPage } = useOrganizerContext()
+    const [count, setCount] = useState(0)
+    const [products, setProducts] = useState<ProductsResponse>({
+        message: '',
+        produtos: []
+    })
+
+    useEffect(() => {
+        axios.get('/api/getProductsApi').then(response => {
+          setProducts(response.data)
+          const totalItems = response.data.produtos.length
+          setProductCount(Math.ceil(totalItems / itemsPerPage))
+        })
+    }, [itemsPerPage, setProductCount])
 
     return (
-        <cartContext.Provider value={{}}
+        <cartContext.Provider value={{ count, products, setProducts, setCount }}
         >
             {children}
         </cartContext.Provider>
-    );
+    )
 }
