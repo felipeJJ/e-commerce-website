@@ -1,4 +1,5 @@
 import CartInfo from "@/components/cart/cartInfo"
+import CheckoutResume from "@/components/cart/checkoutResume"
 import ProductCartCard from "@/components/cart/productCartCard"
 import { Saira } from "next/font/google"
 
@@ -11,9 +12,16 @@ const saira = Saira({
 export default function Cart() {
 
     return(
-        <main className={`${saira.variable} font-serif w-full h-full px-40 pb-24`}>
-            <CartInfo/>
-            <ProductCartCard/>
+        <main className={`${saira.variable} flex justify-between font-serif w-full h-full 
+            px-40 2xl:px-72 pb-24 text-[#41414D]`}
+        >
+            <div>
+                <CartInfo/>
+                <ProductCartCard/>
+            </div>
+            <div>
+                <CheckoutResume/>
+            </div>
         </main>
     )
 }

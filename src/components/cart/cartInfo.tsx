@@ -9,15 +9,13 @@ import { useEffect, useState } from "react"
 
 export default function CartInfo() {
     const router = useRouter()
-    const { products, setProductsOnCart } = useCartContext()
+    const { products, totalPrice, setProductsOnCart, setTotalPrice } = useCartContext()
     const [ totalItems, setTotalItems ] = useState(0)
-    const [ total, setTotal ] = useState(0)
-
     
     useEffect(() => {
         let cartItems = localStorage.getItem('cart-items')
         const prodctsArray: Products[] = products.produtos
-        
+
         if (cartItems) {
             let cartItemsArray = JSON.parse(cartItems)
 
@@ -49,9 +47,9 @@ export default function CartInfo() {
                 }
                 return acc
             }, 0)
-            setTotal(totalTemp)
+            setTotalPrice(totalTemp)
         }
-    }, [products.produtos, setProductsOnCart])
+    }, [products.produtos, setProductsOnCart, setTotalPrice])
 
     function handleBack(){
         router.push('/')
@@ -63,10 +61,10 @@ export default function CartInfo() {
                 <BackIcon/>
                 <p className=" text-[#737380]">Voltar</p>
             </button>
-            <h2 className="font-medium text-2xl text-[#41414D] mt-5">SEU CARRINHO</h2>
-            <div className="flex gap-1 mt-1 text-[#41414D]">
+            <h2 className="font-medium text-2xl mt-5">SEU CARRINHO</h2>
+            <div className="flex gap-1 mt-1">
                 <h3>{`Total (${totalItems} ${totalItems === 1 ? 'produto' : 'produtos'})`}</h3>
-                <h3 className="font-semibold">{`R$${total.toFixed(2)}`}</h3>
+                <h3 className="font-semibold">{`R$${totalPrice.toFixed(2)}`}</h3>
             </div>
         </>
     )
