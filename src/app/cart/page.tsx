@@ -11,7 +11,7 @@ const saira = Saira({
 export default function Cart() {
 
     return(
-        <main className={`${saira.variable} font-serif w-full h-full px-40`}>
+        <main className={`${saira.variable} font-serif w-full h-full px-40 pb-24`}>
             <CartInfo/>
             <ProductCartCard/>
         </main>

@@ -1,5 +1,7 @@
+'use client'
+
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
-import { ProductsResponse } from '../../types'
+import { ProductsResponse, Products } from '../../types'
 import axios from 'axios'
 import { useOrganizerContext } from './organizerContext'
 
@@ -9,6 +11,8 @@ const cartContext = createContext({
         message: '',
         produtos: []
     } as ProductsResponse,
+    productsOnCart: [] as Products[],
+    setProductsOnCart: (value: Products[]) =>{},
     setProducts: (value: ProductsResponse) =>{},
     setCount:(value: number) =>{},
 })
@@ -28,6 +32,7 @@ export function CartContextProvider({ children }: providerProps) {
         message: '',
         produtos: []
     })
+    const [productsOnCart, setProductsOnCart] = useState<Products[]>([])
 
     useEffect(() => {
         axios.get('/api/getProductsApi').then(response => {
@@ -38,7 +43,7 @@ export function CartContextProvider({ children }: providerProps) {
     }, [itemsPerPage, setProductCount])
 
     return (
-        <cartContext.Provider value={{ count, products, setProducts, setCount }}
+        <cartContext.Provider value={{ count, products, productsOnCart, setProductsOnCart, setProducts, setCount }}
         >
             {children}
         </cartContext.Provider>
