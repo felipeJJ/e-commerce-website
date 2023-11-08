@@ -56,7 +56,7 @@ export default function ProductCard() {
         <>
             {currentItems.map((product) => (
                 <section key={product._id} className="w-64 h-[410px] shadow-lg">
-                    <div className="w-64 h-[300px] relative boder-2 border-red-300">
+                    <div className="w-64 h-[300px] relative">
                         <Image
                             fill
                             src={product.imagens[1]}
