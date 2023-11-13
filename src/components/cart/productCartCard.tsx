@@ -52,6 +52,7 @@ export default function ProductCartCard() {
                                 src={product.imagens[1]}
                                 alt="Product image"
                                 style={{objectFit: "fill"}}
+                                sizes="(max-width: 300px) 100vw"
                             />
                         </div>
                         <div id="description" className="w-full">
