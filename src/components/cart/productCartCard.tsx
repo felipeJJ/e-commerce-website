@@ -20,7 +20,7 @@ export default function ProductCartCard() {
         const cartItems = JSON.parse(localStorage.getItem('cart-items') || '[]')
         const updatedCartItems = cartItems.map((item: { productId: string }) => {
             if (item.productId === productId) {
-                return { ...item, quantity: newQuantity }
+                return { ...item, quantity: Number(newQuantity) }
             }
             return item
         })
