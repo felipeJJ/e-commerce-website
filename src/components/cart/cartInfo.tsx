@@ -4,13 +4,11 @@ import { useCartContext } from "@/contexts/cartContext"
 import BackIcon from "@/components/cart/backIcon"
 import { useRouter } from "next/navigation"
 import { Products } from "../../../types"
-import { useEffect, useState } from "react"
-
+import { useEffect } from "react"
 
 export default function CartInfo() {
     const router = useRouter()
-    const { products, totalPrice, setProductsOnCart, setTotalPrice } = useCartContext()
-    const [ totalItems, setTotalItems ] = useState(0)
+    const { products, totalPrice, itemsCount, setItemsCount, setProductsOnCart, setTotalPrice } = useCartContext()
     
     useEffect(() => {
         let cartItems = localStorage.getItem('cart-items')
@@ -18,14 +16,13 @@ export default function CartInfo() {
 
         if (cartItems) {
             let cartItemsArray = JSON.parse(cartItems)
-
             let totalItemsTemp = cartItemsArray.reduce((acc: number, item: { quantity: number }) => {
                 if (item.quantity) {
                 return acc + item.quantity
                 }
                 return acc
             }, 0)
-            setTotalItems(totalItemsTemp)
+            setItemsCount(totalItemsTemp)
 
             const productsOnCart = cartItemsArray.map((item: { productId: string; quantity: number }) => {
                 if (item.productId) {
@@ -49,7 +46,7 @@ export default function CartInfo() {
             }, 0)
             setTotalPrice(totalTemp)
         }
-    }, [products.produtos, setProductsOnCart, setTotalPrice])
+    }, [products.produtos, setItemsCount, setProductsOnCart, setTotalPrice])
 
     function handleBack(){
         router.push('/')
@@ -63,7 +60,7 @@ export default function CartInfo() {
             </button>
             <h2 className="font-medium text-2xl mt-5">SEU CARRINHO</h2>
             <div className="flex gap-1 mt-1">
-                <h3>{`Total (${totalItems} ${totalItems === 1 ? 'produto' : 'produtos'})`}</h3>
+                <h3>{`Total (${itemsCount} ${itemsCount === 1 ? 'produto' : 'produtos'})`}</h3>
                 <h3 className="font-semibold">{`R$${totalPrice.toFixed(2)}`}</h3>
             </div>
         </>

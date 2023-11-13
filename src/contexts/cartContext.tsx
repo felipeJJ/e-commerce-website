@@ -13,12 +13,13 @@ const cartContext = createContext({
     } as ProductsResponse,
     productsOnCart: [] as Products[],
     totalPrice: 0,
+    itemsCount: 0,
+    setItemsCount: (value: number) =>{},
     setTotalPrice:(value: number) =>{},
     setProductsOnCart: (value: Products[]) =>{},
     setProducts: (value: ProductsResponse) =>{},
     setCount:(value: number) =>{},
 })
-
 export const useCartContext = () => {
     return useContext(cartContext)
 }
@@ -36,6 +37,8 @@ export function CartContextProvider({ children }: providerProps) {
     })
     const [productsOnCart, setProductsOnCart] = useState<Products[]>([])
     const [ totalPrice, setTotalPrice ] = useState(0)
+    const [ itemsCount, setItemsCount ] = useState(0)
+
 
     useEffect(() => {
         axios.get('/api/getProductsApi').then(response => {
@@ -46,8 +49,8 @@ export function CartContextProvider({ children }: providerProps) {
     }, [itemsPerPage, setProductCount])
 
     return (
-        <cartContext.Provider value={{ count, products, productsOnCart, totalPrice, 
-            setTotalPrice, setProductsOnCart, setProducts, setCount }}
+        <cartContext.Provider value={{ count, products, productsOnCart, totalPrice, itemsCount, 
+            setItemsCount, setTotalPrice, setProductsOnCart, setProducts, setCount }}
         >
             {children}
         </cartContext.Provider>
