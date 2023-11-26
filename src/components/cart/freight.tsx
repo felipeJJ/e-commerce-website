@@ -8,7 +8,7 @@ import withReactContent from 'sweetalert2-react-content'
 
 export default function Freight() {
 
-    const { count, freightValue, setFreightValue } = useCartContext()
+    const { count, setFreightValue } = useCartContext()
     const [ cep, setCep ] = useState('')
     const [ hideInfo, setHideInfo ] = useState(true)
     const [ isAnimating, setIsAnimating ] = useState(false)
@@ -40,7 +40,12 @@ export default function Freight() {
 
         if( formatedCep.length >= 8){
             try {
-                const res = await fetch(`https://cepcerto.com/ws/json-frete/29060370/${formatedCep}/${count*300}/${count*10}/${count*10}/${count*10}/edaffb0b343f1e4623e66fe0e3b09b1d33b86fa1`)
+                const res = await fetch(
+                    `https://cepcerto.com/ws/json-frete
+                    /29060370/${formatedCep}/${count*300}
+                    /${count*10}/${count*10}/${count*10}
+                    /edaffb0b343f1e4623e66fe0e3b09b1d33b86fa1`
+                )
                 const repo = await res.json()
                 if(repo.msg){
                     MySwal.fire({
