@@ -14,8 +14,8 @@ const cartContext = createContext({
     productsOnCart: [] as Products[],
     totalPrice: 0,
     itemsCount: 0,
-    cep: '',
-    setCep: (value: string) =>{},
+    freightValue: '',
+    setFreightValue: (value: string) =>{},
     setItemsCount: (value: number) =>{},
     setTotalPrice:(value: number) =>{},
     setProductsOnCart: (value: Products[]) =>{},
@@ -40,7 +40,7 @@ export function CartContextProvider({ children }: providerProps) {
     const [productsOnCart, setProductsOnCart] = useState<Products[]>([])
     const [ totalPrice, setTotalPrice ] = useState(0)
     const [ itemsCount, setItemsCount ] = useState(0)
-    const [ cep, setCep ] = useState('')
+    const [ freightValue, setFreightValue ] = useState('')
 
 
     useEffect(() => {
@@ -52,8 +52,8 @@ export function CartContextProvider({ children }: providerProps) {
     }, [itemsPerPage, setProductCount])
 
     return (
-        <cartContext.Provider value={{ count, products, productsOnCart, totalPrice, itemsCount, cep,
-            setCep, setItemsCount, setTotalPrice, setProductsOnCart, setProducts, setCount }}
+        <cartContext.Provider value={{ count, products, productsOnCart, totalPrice, itemsCount, freightValue, 
+            setFreightValue, setItemsCount, setTotalPrice, setProductsOnCart, setProducts, setCount }}
         >
             {children}
         </cartContext.Provider>

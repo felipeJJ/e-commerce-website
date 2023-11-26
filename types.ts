@@ -23,3 +23,12 @@ export interface Products{
     message: string;
     produtos: []
   }
+  export interface FreightResponse{
+    cepdestino: string;  
+    ceporigem: string;
+    prazopac: string;
+    prazosedex: string;
+    valorpac: string;
+    valorsedex: string;
+  }
+

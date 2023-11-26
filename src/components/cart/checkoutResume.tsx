@@ -9,7 +9,7 @@ export default function CheckoutResume() {
 
     return(
 
-        <div className=" mt-12">
+        <div className=" mt-10">
             <Freight/>
             <div className=" w-[352px] h-[330px] bg-gray-50 mt-3 px-6 py-6 rounded-xl shadow-lg">
                 <h1 className="text-xl font-semibold ">RESUMO DO PEDIDO</h1>
