@@ -66,7 +66,6 @@ export default function Freight() {
         setSelectedOption(option)
         const selectedDataValue = option === 'pac' ? data.valorpac : data.valorsedex
         setFreightValue(selectedDataValue)
-        console.log(freightValue)
     }
 
     return(

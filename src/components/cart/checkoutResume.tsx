@@ -4,9 +4,9 @@ import { useCartContext } from "@/contexts/cartContext"
 import Freight from "./freight"
 
 export default function CheckoutResume() {
-    const { totalPrice } = useCartContext()
-    const entrega = 40 as number
-
+    const { totalPrice, freightValue} = useCartContext()
+    const formatedFreightValue = Number(freightValue.replace(',', '.'))
+    
     return(
 
         <div className=" mt-10">
@@ -19,12 +19,12 @@ export default function CheckoutResume() {
                 </div>
                 <div className="flex justify-between mt-3">
                     <p>Entrega</p>
-                    <p>R$ {entrega.toFixed(2)}</p>
+                    <p>R$ {formatedFreightValue.toFixed(2)}</p>
                 </div>
                 <div className="w-[304px] h-[1px] bg-[#DCE2E5] mt-6"></div>     
                 <div className="flex justify-between mt-4">
                     <p>Totoal</p>
-                    <p>{(totalPrice + entrega).toFixed(2)}</p>
+                    <p>{(totalPrice + formatedFreightValue).toFixed(2)}</p>
                 </div>
                 <button className="w-[304px] h-11 mt-10 bg-[#51B853] text-white rounded-lg">
                     FINALIZAR A COMPRA
