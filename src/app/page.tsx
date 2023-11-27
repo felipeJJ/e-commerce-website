@@ -1,6 +1,6 @@
 'use client'
 
-import MainBody from "@/components/body/mainBody"
+import MainBody from "@/components/home/mainBody"
 import { OriganizerContextProvider } from "@/contexts/organizerContext"
 
 export default function Home() {

@@ -44,7 +44,7 @@ export default function CartButton({ productId }: ProductCardProps) {
   return (
     <button
         onClick={handleCart}
-        className={`mr-4 mt-1 w-8 h-8 pl-1 bg-gray-100 rounded-full ${isAnimating ? ' animate-ping' : ''}`}
+        className={`sm:mr-4 mr-2 sm:mt-1  sm:w-8 w-5 sm:h-8 h-5 pl-1 bg-gray-100 rounded-full ${isAnimating ? ' animate-ping' : ''}`}
     >
         <CartIcon />
     </button>

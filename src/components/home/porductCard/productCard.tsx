@@ -55,8 +55,8 @@ export default function ProductCard() {
     return(
         <>
             {currentItems.map((product) => (
-                <section key={product._id} className="w-64 h-[410px] shadow-lg">
-                    <div className="w-64 h-[300px] relative">
+                <section key={product._id} className="md:w-64 md:h-[410px] w-32 h-[230px] shadow-lg">
+                    <div className="md:w-64 md:h-[300px] w-32 h-[150px] relative">
                         <Image
                             fill
                             src={product.imagens[1]}
@@ -65,18 +65,18 @@ export default function ProductCard() {
                             sizes="(max-width: 300px) 100vw"
                         />
                     </div>
-                    <div className={`${saira.variable} font-serif w-64 absolute`}>
-                        <div className=" flex justify-center mt-1">
+                    <div className={`${saira.variable} font-serif md:w-64 w-32 absolute md:text-base text-xs `}>
+                        <div className=" flex justify-center md:mt-1 mt-0.5">
                             <Line/>
                         </div>
-                        <p className={`my-2 mx-3 font-light`}>
+                        <p className={`md:my-2 md:mx-3 my-1 mx-1.5 font-light`}>
                             {product.nome}
                         </p>
                         <div className=" flex justify-center">
                             <Line/>
                         </div>
-                        <div className={`flex justify-between h-14 w-64 ${product.nome.length < 29 ? 'mt-3' : ''} `}>
-                            <p className="my-2 mx-3 font-semibold">
+                        <div className={`flex justify-between md:h-14 md:w-64 h-7 w-32 ${product.nome.length < 29 ? 'md:mt-3 mt-1.5' : ''} `}>
+                            <p className="md:my-2 md:mx-3 my-1 mx-1.5 font-semibold">
                                 {`R$ ${product.preco},00`}
                             </p>
                             <ButtonCart productId={product._id}/>
