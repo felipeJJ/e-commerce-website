@@ -41,9 +41,7 @@ export default function Freight() {
         if( formatedCep.length >= 8){
             try {
                 const res = await fetch(
-                    `https://www.cepcerto.com/ws/json-frete/29060370/
-                    ${formatedCep}/${count*300}/${count*10}/${count*10}/
-                    ${count*10}/edaffb0b343f1e4623e66fe0e3b09b1d33b86fa1`
+                    `https://www.cepcerto.com/ws/json-frete/29060370/${formatedCep}/${count*100}/${count*10}/${count*10}/${count*10}/edaffb0b343f1e4623e66fe0e3b09b1d33b86fa1`
                 )
                 const repo = await res.json()
                 if(repo.msg){
