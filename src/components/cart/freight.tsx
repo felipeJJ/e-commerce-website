@@ -37,14 +37,13 @@ export default function Freight() {
         setIsAnimating(true)
 
         const formatedCep = cep.replace(/\D/g, '')
-
+        
         if( formatedCep.length >= 8){
             try {
                 const res = await fetch(
-                    `https://cepcerto.com/ws/json-frete
-                    /29060370/${formatedCep}/${count*300}
-                    /${count*10}/${count*10}/${count*10}
-                    /edaffb0b343f1e4623e66fe0e3b09b1d33b86fa1`
+                    `https://www.cepcerto.com/ws/json-frete/29060370/
+                    ${formatedCep}/${count*300}/${count*10}/${count*10}/
+                    ${count*10}/edaffb0b343f1e4623e66fe0e3b09b1d33b86fa1`
                 )
                 const repo = await res.json()
                 if(repo.msg){
