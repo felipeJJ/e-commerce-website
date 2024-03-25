@@ -8,7 +8,7 @@ import withReactContent from 'sweetalert2-react-content'
 
 export default function Freight() {
 
-    const { count, setFreightValue } = useCartContext()
+    const { itemsCount, setFreightValue } = useCartContext()
     const [ cep, setCep ] = useState('')
     const [ hideInfo, setHideInfo ] = useState(true)
     const [ isAnimating, setIsAnimating ] = useState(false)
@@ -41,13 +41,13 @@ export default function Freight() {
         if( formatedCep.length >= 8){
             try {
                 const res = await fetch(
-                    `https://www.cepcerto.com/ws/json-frete/29060370/${formatedCep}/${count*100}/${count*10}/${count*10}/${count*10}/edaffb0b343f1e4623e66fe0e3b09b1d33b86fa1`
+                    `https://www.cepcerto.com/ws/json-frete/29060370/${formatedCep}/${itemsCount*100}/${itemsCount*10}/${itemsCount*10}/${itemsCount*10}/edaffb0b343f1e4623e66fe0e3b09b1d33b86fa1`
                 )
                 const repo = await res.json()
                 if(repo.msg){
                     MySwal.fire({
                         title: "Error!",
-                        text: `${repo.msg}`,
+                        text: `Erro ao calcular o frete, tente novamente mais tarde`,
                         width: 300,
                     })
                 }
