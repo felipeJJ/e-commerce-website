@@ -6,6 +6,7 @@ import CartControler from './cartController'
 import Logo from './logo'
 import SarchBar from './sarchBar'
 import { Saira } from 'next/font/google'
+import Login from "./login"
 
 const saira = Saira({
     subsets: ['latin'],
@@ -26,6 +27,7 @@ export default function Header() {
             <Logo/>
             <div className={`${saira.variable} font-serif flex items-center`}>
                 <SarchBar/>
+                <Login/>
                 <button onClick={handleCart} className="flex ml-1 mr-3 sm:ml-4">
                     <BagIcon/>
                     <CartControler/>
