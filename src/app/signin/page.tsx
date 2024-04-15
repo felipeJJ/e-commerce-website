@@ -1,20 +1,19 @@
 "use client"
 
-import { signIn, useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { Saira } from "next/font/google"
-import EmailIcon from "@/components/login/emailIcon"
-import PasswordIcon from "@/components/login/passwordIcon"
-import GoogleIcon from "@/components/login/googleIcon"
+import EmailIcon from "@/components/signin/emailIcon"
+import PasswordIcon from "@/components/signin/passwordIcon"
+import GoogleIcon from "@/components/signin/googleIcon"
 
 const schema = yup
     .object({
         email: yup.string().email('e-mail não é válido').required('Campo obrigatorio!'),
         password: yup.string().min(6, 'No minimo 6 digiotos').required('Campo obrigatorio!'),
-    })
-    .required()
+    }).required()
 
 const saira = Saira({
     subsets: ['latin'],
@@ -23,7 +22,6 @@ const saira = Saira({
 })
 
 export default function SignIn(){
-    const {data: session} = useSession()
     
     const {
         register,
@@ -37,7 +35,7 @@ export default function SignIn(){
 
         signIn("credentials", {
           ...data,
-          callbackUrl: '/',
+          callbackUrl: 'https://2jdt4w29-3000.brs.devtunnels.ms/',
         })
     }
 
