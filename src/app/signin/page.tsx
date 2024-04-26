@@ -75,6 +75,7 @@ export default function SignIn(){
                     <div className="w-2/5 h-[1px] bg-[#DCE2E5] mt-6"></div>     
                 </div>
                 <button 
+                    type="button"
                     onClick={() => signIn("google", {callbackUrl: "/"})}
                     className="flex mr-4 rounded-lg bg-gray-300 w-38 min-h-fit p-4 gap-4 mt-4"
                 >
