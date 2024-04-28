@@ -33,7 +33,9 @@ export const signUpFormSchema = yup.object({
         .min(9, "CEP deve conter 8 digitos")
         .required("Campo obrigatório"),
 
-    houseNumber: yup.string().required("Campo obrigatório"),
+    houseNumber: yup.string()
+    .required("Campo obrigatório")
+    .matches(/^\d{0,4}$/),
 
     district : yup.string().required("Campo obrigatório"),
 })
