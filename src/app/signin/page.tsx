@@ -1,6 +1,8 @@
 "use client"
 
-import { signIn } from "next-auth/react"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { signIn, SignInResponse } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
@@ -22,21 +24,38 @@ const saira = Saira({
 })
 
 export default function SignIn(){
-    
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm({
-        resolver: yupResolver(schema),
-    })
-    
-    const onSubmit = async (data: any) => {
+    const [error, setError] = useState<string>("")
+    const router = useRouter()
 
-        signIn("credentials", {
-          ...data,
-          callbackUrl: 'https://2jdt4w29-3000.brs.devtunnels.ms/',
-        })
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({
+        resolver: yupResolver(schema),
+        mode: "all",
+    })
+
+    const onSubmit = async (data: {email: string, password: string}) => {
+        try {
+            const result: SignInResponse | undefined = await signIn("credentials", {
+                ...data,
+                redirect: false,
+                callbackUrl: process.env.NEXTAUTH_URL,
+            })
+            
+            if (result && result.error) {
+                renderError(result.error)
+                reset();
+            } else {
+                router.push("/")
+            }
+        } catch (error) {
+            renderError("Erro ao criar conta, tente mais tarde")
+        }
+    }
+
+    function renderError(msg: string) {
+        setError(msg)
+        setTimeout(() => {
+            setError("")
+        }, 3000)
     }
 
     return(
@@ -69,6 +88,9 @@ export default function SignIn(){
                     {errors.password && <p className="text-sm text-red-800 pl-2 mt-2" role="alert">{errors.password.message}</p>}
                 </div>
                 <button type="submit" className="btn btn-neltral w-full text-lg mt-5 bg-gray-300"> Entrar </button>
+                {error && (
+                            <span className="text-sm text-red-800 pl-2 mt-1">{error}</span>
+                        )}
                 <div className="w-full flex gap-2">
                     <div className="w-2/5 h-[1px] bg-[#DCE2E5] mt-6"></div>     
                     <p className="text-lg translate-y-2">ou</p>
