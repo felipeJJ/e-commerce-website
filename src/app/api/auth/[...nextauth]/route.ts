@@ -1,9 +1,13 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
+import bcrypt from "bcryptjs"
+import database from "../../../../../database/lib/mongoose"
+import UserInfo from "../../../../../database/schemas/userData"
 
 const handler = NextAuth({
     pages: {
+      error: "/signin",
       signIn: "/signin",
     },
     providers: [
@@ -11,7 +15,6 @@ const handler = NextAuth({
             clientId: process.env.GOOGLE_CLIENT_ID??"",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET??"",
             profile(profile){
-              console.log(profile)
               return{
                 id: profile.sub,
                 name: profile.name,
@@ -24,21 +27,34 @@ const handler = NextAuth({
             email: { label: "Email", type: "email", placeholder: "email" },
             password: { label: "Password", type: "password" }
           },
-          async authorize(credentials, req) {
-            console.log(credentials)
-            if (!credentials){
-              return null
-            }
+          async authorize(credentials) {
+            await database.connectMongo()
 
-            if(credentials.email === "a@a.com" && credentials.password === "123456"){
-              return{
-                id: "1",
-                name: "cuzinho",
-                email: "a@a.com"
+            try {
+              if (!credentials) {
+                return null
               }
+
+              const { email, password } = credentials
+              if (!email || !password) {
+                return null;
+              }
+
+              const user = await UserInfo.findOne({ email })
+
+              if (user) {
+                const validPassword = await bcrypt.compare( password, user.password )
+                if(validPassword){
+                  return user
+                } else {
+                throw new Error("usuário ou senha não encontrado")
+                }
+              } else {
+                throw new Error("usuário ou senha não encontrado")
+              }
+            } catch (error) {
+              throw new Error("error ao autenticar" + error)
             }
-    
-            return null
           }
         })
       ]
