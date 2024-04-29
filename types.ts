@@ -31,26 +31,18 @@ export interface FreightResponse{
     valorpac: string;
     valorsedex: string;
 }
-export interface UserAddress{
-  numero: number;
-  rua: string;
-  bairro: string;
-  cidade: string;
-  pais: string;
-  cep: number;
-}
-export interface UserInfoRegister{
-  nome: string;
-  cpf: number;
-  celular: number;
-  email: string;
-  senha: string;
-  endereco?: {
-    numero: number;
-    rua: string;
-    bairro: string;
-    cidade: string;
-    pais: string;
-    cep: number;
-  }
+
+export interface UserInfoData{
+  name: string,
+  cpf: string,
+  cellphone: string,
+  email: string,
+  password: string,
+  confirmPassword: string,
+  state: string,
+  city: string,
+  zip: string,
+  address: string,
+  houseNumber: string,
+  district: string
 }
