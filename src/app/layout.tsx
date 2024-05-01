@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html className={`${sairaStencil.variable} ${saira.variable}`}>
       <SessionProvider>
-        <body>
+        <body className='bg-white'>
           <CartContextProvider>
             <FilterContextProvider>
                 <Header></Header>
