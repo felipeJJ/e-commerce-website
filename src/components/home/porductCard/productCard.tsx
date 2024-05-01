@@ -51,6 +51,7 @@ export default function ProductCard() {
                 <section key={product._id} className="md:w-64 md:h-[410px] w-32 h-[230px] shadow-lg">
                     <div className="md:w-64 md:h-[300px] w-32 h-[150px] relative">
                         <Image
+                            priority
                             fill
                             src={product.imagens[1]}
                             alt="Product image"
