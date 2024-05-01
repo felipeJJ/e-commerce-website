@@ -11,7 +11,7 @@ export default function OrganizerSelection() {
 
     return(
         <div className="mb-6 h-6 flex justify-end ">
-            <select onChange={handleChange} className=" outline-none">
+            <select onChange={handleChange} className=" outline-none" name="organizer">
                 <option value="">Organizar por</option>
                 <option value="newest">Novidades</option>
                 <option value="bigest">Preço: maior - menor</option>

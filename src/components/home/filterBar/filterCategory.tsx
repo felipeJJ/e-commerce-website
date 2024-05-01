@@ -39,7 +39,7 @@ export default function FilterCategory() {
         ))}
       </ul>
       <div className=" mb-6 h-6 flex lg:hidden justify-end">
-            <select onChange={handleChange} className=" outline-none">
+            <select onChange={handleChange} className=" outline-none" name="category">
               <option value={""}>todos os produtos</option>
               {categories.category.map((category: Category) => (
               <option key={category._id} value={category._id}>{category.nomeCategoria}</option>

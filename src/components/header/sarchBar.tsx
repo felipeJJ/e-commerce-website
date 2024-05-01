@@ -11,14 +11,16 @@ export default function SarchBar() {
 
     return(
         <div className="flex bg-gray-100 h-11 w-52 py-2 px-3 rounded-lg sm:w-[359px]">
-            <input 
+            <input
+                name="search-bar"
                 type="text" 
                 value={search}
                 className="outline-none bg-gray-100 w-[296px] pr-20 hidden sm:block" 
                 placeholder='Procura por algo específico'
                 onChange={handleSearch}
             />
-            <input 
+            <input
+                name="search-bar"
                 type="text" 
                 value={search}
                 className="outline-none bg-gray-100 w-40 sm:hidden" 
