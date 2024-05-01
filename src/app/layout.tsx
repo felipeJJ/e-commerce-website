@@ -2,10 +2,24 @@
 
 import './globals.css'
 import Header from '@/components/header/header'
+import { SessionProvider } from 'next-auth/react'
 import { FilterContextProvider } from "@/contexts/filterContext"
 import { CartContextProvider } from '@/contexts/cartContext'
 import '@sweetalert2/theme-bootstrap-4/bootstrap-4.css'
-import { SessionProvider } from 'next-auth/react'
+import {  Saira, Saira_Stencil_One } from 'next/font/google'
+
+
+const sairaStencil = Saira_Stencil_One({
+  weight:['400'],
+  subsets: ['latin'],
+  variable: '--font-saira-stencil',
+})
+
+const saira = Saira({
+  subsets: ['latin'],
+  weight:['300','400', '500', '600'],
+  variable: '--font-saira',
+})
 
 export default function RootLayout({
   children,
@@ -13,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
+    <html className={`${sairaStencil.variable} ${saira.variable}`}>
       <SessionProvider>
         <body>
           <CartContextProvider>

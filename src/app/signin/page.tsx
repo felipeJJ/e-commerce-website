@@ -6,7 +6,6 @@ import { signIn, SignInResponse } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
-import { Saira } from "next/font/google"
 import EmailIcon from "@/components/signin/emailIcon"
 import PasswordIcon from "@/components/signin/passwordIcon"
 import GoogleIcon from "@/components/signin/googleIcon"
@@ -16,12 +15,6 @@ const schema = yup
         email: yup.string().email('e-mail não é válido').required('Campo obrigatorio!'),
         password: yup.string().min(6, 'No minimo 6 digiotos').required('Campo obrigatorio!'),
     }).required()
-
-const saira = Saira({
-    subsets: ['latin'],
-    weight:['300', '400', '500', '600'],
-    variable: '--font-saira',
-})
 
 export default function SignIn(){
     const [error, setError] = useState<string>("")
@@ -59,7 +52,7 @@ export default function SignIn(){
     }
 
     return(
-        <main className={`${saira.variable} font-serif flex items-center justify-center h-screen  text-gray-700`}>
+        <main className="font-serif flex items-center justify-center h-screen  text-gray-700">
             <form onSubmit={handleSubmit(onSubmit)} className='bg-gray-100 py-20 p-12 rounded-lg w-96 max-w-full flex justify-center items-center flex-col gap-4'>
                 <h2 className='font-bold text-3xl mb-3 '>Faça seu login</h2>
                 <div>

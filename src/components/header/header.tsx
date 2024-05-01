@@ -5,14 +5,7 @@ import BagIcon from './bagIcon'
 import CartControler from './cartController' 
 import Logo from './logo'
 import SarchBar from './sarchBar'
-import { Saira } from 'next/font/google'
 import Login from "./login"
-
-const saira = Saira({
-    subsets: ['latin'],
-    weight:['400'],
-    variable: '--font-saira',
-})
 
 export default function Header() {
     const router = useRouter()
@@ -21,11 +14,11 @@ export default function Header() {
         router.push('/cart')
     }
     return(
-        <header className=" flex w-full h-20 mb-1 py-5 items-center justify-between 
+        <header className="flex w-full h-20 mb-1 py-5 items-center justify-between 
             md:px-[160px] shadow-md"
         >
             <Logo/>
-            <div className={`${saira.variable} font-serif flex items-center`}>
+            <div className=" font-serif flex items-center">
                 <SarchBar/>
                 <Login/>
                 <button onClick={handleCart} className="flex ml-1 mr-3 sm:ml-4">

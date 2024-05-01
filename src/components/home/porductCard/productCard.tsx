@@ -1,18 +1,11 @@
 import { Products } from "../../../../types"
-import Image from "next/image"
-import Line from "./lineDivider"
-import { Saira } from 'next/font/google'
 import { useCartContext } from "@/contexts/cartContext"
 import { useFilterContext } from "@/contexts/filterContext"
 import { useOrganizerContext } from "@/contexts/organizerContext"
 import { useEffect } from "react"
+import Image from "next/image"
 import ButtonCart from "./cartButton"
-
-const saira = Saira({
-    subsets: ['latin'],
-    weight:['300', '600'],
-    variable: '--font-saira',
-})
+import Line from "./lineDivider"
 
 export default function ProductCard() {
     const  { products } = useCartContext()
@@ -65,7 +58,7 @@ export default function ProductCard() {
                             sizes="(max-width: 300px) 100vw"
                         />
                     </div>
-                    <div className={`${saira.variable} font-serif md:w-64 w-32 absolute md:text-base text-xs `}>
+                    <div className="font-serif md:w-64 w-32 absolute md:text-base text-xs">
                         <div className=" flex justify-center md:mt-1 mt-0.5">
                             <Line/>
                         </div>
