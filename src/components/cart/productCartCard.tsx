@@ -65,6 +65,7 @@ export default function ProductCartCard() {
                             <p className="bg-gray-50 mt-3 w-[470px] h-20 text-xs overflow-y-scroll ">{product.descricao}</p>
                             <div className="mt-6 flex justify-between mr-5">
                                 <select 
+                                    id="quantityItems"
                                     className="bg-gray-50 outline-none" 
                                     value={initialQuantity} 
                                     onChange={(e) => handleQuantityChange(product._id, e.target.value)}
