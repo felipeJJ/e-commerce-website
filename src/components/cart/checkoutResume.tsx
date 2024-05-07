@@ -1,16 +1,15 @@
 'use client'
 
 import { useCartContext } from "@/contexts/cartContext"
-import Freight from "./freight"
+import FreightController from "./freight/freightController"
 
 export default function CheckoutResume() {
     const { totalPrice, freightValue} = useCartContext()
     const formatedFreightValue = Number(freightValue.replace(',', '.'))
     
     return(
-
-        <div className=" mt-10">
-            <Freight/>
+        <div className="mt-10">
+            <FreightController/>
             <div className=" w-[352px] h-[330px] bg-gray-50 mt-3 px-6 py-6 rounded-xl shadow-lg">
                 <h1 className="text-xl font-semibold ">RESUMO DO PEDIDO</h1>
                 <div className="flex justify-between mt-7">
