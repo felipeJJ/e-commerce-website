@@ -46,3 +46,31 @@ export interface UserInfoData{
   houseNumber: string,
   district: string
 }
+
+interface Company {
+  id: number;
+  name: string;
+  picture: string;
+}
+
+export interface DeliveryOption {
+  id: number;
+  name: string;
+  price: string;
+  custom_price: string;
+  discount: string;
+  currency: string;
+  delivery_time: number;
+  delivery_range: {
+    min: number;
+    max: number;
+  };
+  custom_delivery_time: number;
+  custom_delivery_range: {
+    min: number;
+    max: number;
+  };
+  packages: {};
+  additional_services: {};
+  company: Company;
+}
