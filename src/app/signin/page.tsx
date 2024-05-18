@@ -52,8 +52,8 @@ export default function SignIn(){
     }
 
     return(
-        <main className="font-serif flex items-center justify-center h-screen  text-gray-700">
-            <form onSubmit={handleSubmit(onSubmit)} className='bg-gray-100 py-20 p-12 rounded-lg w-96 max-w-full flex justify-center items-center flex-col gap-4'>
+        <main className="font-serif flex items-center justify-center h-full text-gray-700 overflow-hidden">
+            <form onSubmit={handleSubmit(onSubmit)} className='bg-gray-100 py-20 p-12 rounded-lg w-96 max-w-full flex justify-center items-center flex-col gap-4 my-24'>
                 <h2 className='font-bold text-3xl mb-3 '>Faça seu login</h2>
                 <div>
                     <label className="input input-bordered flex items-center gap-2">
