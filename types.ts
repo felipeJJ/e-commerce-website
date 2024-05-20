@@ -37,8 +37,8 @@ export interface UserInfoData{
   cpf: string;
   cellphone: string;
   email: string;
-  password: string;
-  confirmPassword: string;
+  password?: string;
+  confirmPassword?: string;
   state: string;
   city: string;
   zip: string;
