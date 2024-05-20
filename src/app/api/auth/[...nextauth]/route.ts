@@ -18,6 +18,7 @@ const handler = NextAuth({
               return{
                 id: profile.sub,
                 name: profile.name,
+                email: profile.email,
               }
             }
         }),

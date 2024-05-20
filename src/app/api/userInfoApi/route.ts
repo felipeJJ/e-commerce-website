@@ -34,3 +34,30 @@ export async function POST(req: Request) {
         )
     } 
 }
+
+export async function GET(req: Request, res: Response) {
+    await database.connectMongo()
+
+    const url = new URL(req.url)
+    const email = url.searchParams.get('email')
+
+    try {
+        const user: UserInfoData | null = await UserInfo.findOne({ email }).lean()
+        if (user) {
+            return NextResponse.json(
+                { message: "Usuário encontrado", email: user.email },
+                { status: 200 }
+            )
+        } else {
+            return NextResponse.json(
+                { message: "Usuário não encontrado" },
+                { status: 404 }
+            )
+        }
+    } catch (error) {
+        return NextResponse.json(
+            { message: "Erro ao buscar usuário", error },
+            { status: 500 }
+        )
+    }
+}
