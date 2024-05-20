@@ -33,17 +33,17 @@ export interface FreightResponse{
 }
 
 export interface UserInfoData{
-  name: string,
-  cpf: string,
-  cellphone: string,
-  email: string,
-  password: string,
-  confirmPassword: string,
-  state: string,
-  city: string,
-  zip: string,
-  address: string,
-  houseNumber: string,
+  name: string;
+  cpf: string;
+  cellphone: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  state: string;
+  city: string;
+  zip: string;
+  address: string;
+  houseNumber: string;
   district: string
 }
 
