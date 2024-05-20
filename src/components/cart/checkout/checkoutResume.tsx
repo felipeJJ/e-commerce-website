@@ -1,7 +1,8 @@
 'use client'
 
 import { useCartContext } from "@/contexts/cartContext"
-import FreightController from "./freight/freightController"
+import FreightController from "../freight/freightController"
+import CheckoutButton from "./checkoutButton"
 
 export default function CheckoutResume() {
     const { totalPrice, freightValue} = useCartContext()
@@ -25,9 +26,7 @@ export default function CheckoutResume() {
                     <p>Totoal</p>
                     <p>{(totalPrice + formatedFreightValue).toFixed(2)}</p>
                 </div>
-                <button className="w-[304px] h-11 mt-10 bg-[#51B853] text-white rounded-lg">
-                    FINALIZAR A COMPRA
-                </button>
+                <CheckoutButton/>
             </div>
         </div>
     )

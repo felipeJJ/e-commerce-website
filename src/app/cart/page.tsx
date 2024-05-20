@@ -1,5 +1,5 @@
 import CartInfo from "@/components/cart/cartInfo"
-import CheckoutResume from "@/components/cart/checkoutResume"
+import CheckoutResume from "@/components/cart/checkout/checkoutResume"
 import ProductCartCard from "@/components/cart/productCartCard"
 
 export default function Cart() {
