@@ -37,8 +37,21 @@ export interface UserInfoData{
   cpf: string;
   cellphone: string;
   email: string;
-  password?: string;
-  confirmPassword?: string;
+  password: string;
+  confirmPassword: string;
+  state: string;
+  city: string;
+  zip: string;
+  address: string;
+  houseNumber: string;
+  district: string
+}
+
+export interface UserInfoDataAuth{
+  name: string;
+  cpf: string;
+  cellphone: string;
+  email: string;
   state: string;
   city: string;
   zip: string;

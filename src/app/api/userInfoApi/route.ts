@@ -18,7 +18,7 @@ export async function POST(req: Request) {
                 { status: 409 },
             )
         }
-        const hashedPassword = await bcrypt.hash(password, 5)
+        const hashedPassword = bcrypt.hash(password, 5)
         await UserInfo.create({
             name, cpf, cellphone, email, password:hashedPassword, confirmPassword:hashedPassword, 
             state, city, zip, address, houseNumber, district

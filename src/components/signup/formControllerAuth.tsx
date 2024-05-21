@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import UserInfoForm from "./userInfo/userInfoForm"
 import UserAddressForm from "./userAddress/userAddressForm"
 import { signUpFormSchemaAuth } from "../../schemas/signupFormSchema"
-import { UserInfoData } from "../../../types"
+import { UserInfoDataAuth } from "../../../types"
 
 export default function FormControlerAuth() {
     const [error, setError] = useState("")
@@ -38,7 +38,7 @@ export default function FormControlerAuth() {
         }
     }
     
-    const onSubmit = async (data: UserInfoData) => {
+    const onSubmit = async (data: UserInfoDataAuth) => {
         setIsSubmitting(true)
         try {
             const response = await axios.post('/api/userInfoApi', { ...data }, {
