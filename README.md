@@ -82,4 +82,8 @@ $ npm run dev
 
 ### Some Observations about this App
 
+<<<<<<< HEAD
 This is an MVP and lacks features that will be implemented in the future, such as applying payment methods.
+=======
+This is an MVP and lacks features that will be implemented in the future, such as applying payment methods.
+>>>>>>> refs/remotes/origin/main
