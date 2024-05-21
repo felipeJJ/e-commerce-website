@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# e-commerce-website
+This is a full stack application for an e-commerce website!
 
+<img width="1440" alt="Captura de Tela 2023-10-03 às 15 08 42" src="https://github.com/felipeJJ/e-commerce-admin/assets/43899843/2191667b-f267-4931-a97c-2cf8f146abe5">
+
+## About this Project
+
+The idea of the App is:
+
+Put into practice all the programming knowledge I've gained so far and create a functional product.
+
+## Functionalities
+- Shows product catalog according to the applied filters
+  - Search for a product by name
+  - Select a product category
+  - Organize by new products
+  - Organize in order of value
+  - Move to the next product page
+
+- Add products to cart
+  -add a product with the first click or increase the quantity of the same product by clicking again on the cart icon for that product
+  
+- On cart page:
+  - Shows all products in the shopping cart
+  - Shows a summary of the products
+  - You can edit the quantity of the same product you want to buy
+  - You can delete a specific product
+  - Calculate shipping to your destination and choose from options
+  - Place the order
+ 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+To run this project in the development mode, you'll need to have a basic environment to run a Next JS APP.
+
+Also create a .env file that conteins your MongoDB URI (used in database/lib/mongoose.ts as mongoUri) and the accses information to your S3 Cliente (used in pages/api/upload.ts as accessKeyId and secretAccessKey).
+
+**Cloning the Repository**
+
+```
+$ git clone https://github.com/felipeJJ/e-commerce-admin.git
+
+$ cd e-commerce-admin
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Installing dependencies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+$ yarn
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+_or_
 
-## Learn More
+```
+$ npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Running
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+With all dependencies installed and the environment properly configured, you can now run the app:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+$ npm run dev
+```
 
-## Deploy on Vercel
+## Built With
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Next JS](https://nextjs.org) - Front-end framework 
+- [typescript](https://www.typescriptlang.org) - Add types to JS
+- [tailwindcss](https://tailwindcss.com) - Create all the stylization
+- [axios](https://axios-http.com) - Used to make HTTP requests
+- [mongodb](https://www.mongodb.com) - Data base
+- [mongoose](https://mongoosejs.com) - Create schema-based solution to model your application data
+- [multiparty](https://github.com/pillarjs/multiparty) - Parse http requests with content-type
+- [sweetalert2](https://sweetalert2.github.io) - Show warning pop ups on screen
+- [cepcertoapi](https://cepcerto.com/) - API that calculates shipping values ​​and deadlines
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Support tools
+
+- [Amazon S3](https://aws.amazon.com/pt/s3/) - Storage Service
+
+### Some Observations about this App
+
+This is an MVP and lacks features that will be implemented in the future, such as applying payment methods.
