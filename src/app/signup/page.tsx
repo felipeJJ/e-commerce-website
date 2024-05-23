@@ -12,7 +12,9 @@ export default function SignUp() {
             {!session && (
                 <FormController/>
             )}
-            <FormControlerAuth/>
+            {session && (
+                <FormControlerAuth/>
+            )}
         </main>
     )
 }
