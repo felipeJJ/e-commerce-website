@@ -32,8 +32,8 @@ export default function FreightController() {
                 const options = {
                     method: 'POST',
                     body: JSON.stringify({
-                        from: {postal_code: formattedCep},
-                        to: {postal_code: '27060370'},
+                        from: {postal_code: '27060370'},
+                        to: {postal_code: formattedCep},
                         package: {height: count * 5, width: count * 10, length: count * 10, weight: count * 0.8}
                     })
                 }
