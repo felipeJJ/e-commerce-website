@@ -3,7 +3,8 @@ import bcrypt from "bcryptjs"
 import database from "../../../../database/lib/mongoose"
 import UserInfo from "../../../../database/schemas/userData"
 import { UserInfoData } from "../../../../types"
-
+import { getServerSession } from "next-auth"
+import { handler } from "../auth/[...nextauth]/route"
 
 export async function POST(req: Request) {
     await database.connectMongo()
@@ -18,7 +19,7 @@ export async function POST(req: Request) {
                 { status: 409 },
             )
         }
-        const hashedPassword = bcrypt.hash(password, 5)
+        const hashedPassword = await bcrypt.hash(password, 5)
         await UserInfo.create({
             name, cpf, cellphone, email, password:hashedPassword, confirmPassword:hashedPassword, 
             state, city, zip, address, houseNumber, district
@@ -35,24 +36,29 @@ export async function POST(req: Request) {
     } 
 }
 
-export async function GET(req: Request, res: Response) {
+export async function GET(req: Request) {
     await database.connectMongo()
+
+    const session = await getServerSession(handler)
 
     const url = new URL(req.url)
     const email = url.searchParams.get('email')
 
     try {
-        const user: UserInfoData | null = await UserInfo.findOne({ email }).lean()
-        if (user) {
-            return NextResponse.json(
-                { message: "Usuário encontrado", email: user.email },
-                { status: 200 }
-            )
-        } else {
-            return NextResponse.json(
-                { message: "Usuário não encontrado" },
-                { status: 404 }
-            )
+        if(session?.user?.email === email){
+
+            const user: UserInfoData | null = await UserInfo.findOne({ email }).lean()
+            if (user) {
+                return NextResponse.json(
+                    { message: "Usuário encontrado", user },
+                    { status: 200 }
+                )
+            } else {
+                return NextResponse.json(
+                    { message: "Usuário não encontrado" },
+                    { status: 404 }
+                )
+            }
         }
     } catch (error) {
         return NextResponse.json(

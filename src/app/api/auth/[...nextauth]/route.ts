@@ -1,11 +1,11 @@
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import bcrypt from "bcryptjs"
 import database from "../../../../../database/lib/mongoose"
 import UserInfo from "../../../../../database/schemas/userData"
 
-const handler = NextAuth({
+export const handler: NextAuthOptions = NextAuth({
     pages: {
       error: "/signin",
       signIn: "/signin",
