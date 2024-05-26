@@ -9,9 +9,10 @@ import { handler } from "../auth/[...nextauth]/route"
 export async function POST(req: Request) {
     await database.connectMongo()
     try {
-        const { name, cpf, cellphone, email, password, confirmPassword, 
+        const { name, cpf, cellphone, email, password, confirmPassword,
             state, city, zip, address, houseNumber, district
         } = await req.json() as unknown  as UserInfoData
+
         const emailExists = await UserInfo.findOne({ email })
         if (emailExists) {
             return NextResponse.json(
@@ -19,11 +20,19 @@ export async function POST(req: Request) {
                 { status: 409 },
             )
         }
-        const hashedPassword = await bcrypt.hash(password, 5)
-        await UserInfo.create({
-            name, cpf, cellphone, email, password:hashedPassword, confirmPassword:hashedPassword, 
+
+        let userPayload: Partial<UserInfoData> = {
+            name, cpf, cellphone, email,
             state, city, zip, address, houseNumber, district
-        })
+        }
+
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 5)
+            userPayload = { ...userPayload, password: hashedPassword, confirmPassword: hashedPassword }
+        }
+
+        await UserInfo.create(userPayload)
+        
         return NextResponse.json(
             { message: "Usuário criado com susseco!", UserInfo },
             { status: 200 }

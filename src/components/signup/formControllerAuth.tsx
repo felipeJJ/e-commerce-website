@@ -1,7 +1,7 @@
 "use client"
 
 import axios from "axios"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useForm, FormProvider } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -26,7 +26,7 @@ export default function FormControlerAuth() {
 
     const nextStep = async () => {
         const stepFields = formStep === 0
-            ? ["name", "cellphone", "cpf", "email", "password", "confirmPassword"]
+            ? ["name", "cellphone", "cpf", "email"]
             : ["address", "state", "city", "zip", "district"]
         const isValid = await methods.trigger(stepFields as 
             (   
@@ -45,7 +45,7 @@ export default function FormControlerAuth() {
                 headers: {'Content-Type': 'application/json'}
             })
             if (response.status === 200 ){
-                // router.push('/checkout')
+                router.push('/cart')
             } else {
                 renderError( response.data.message )
                 reset()
