@@ -6,7 +6,11 @@ import { useRouter } from "next/navigation"
 import { Products } from "../../../types"
 import { useEffect } from "react"
 
-export default function CartInfo() {
+interface CartInfoProps {
+    tituliInfo: string;
+}
+
+export default function CartInfo({tituliInfo}: CartInfoProps) {
     const router = useRouter()
     const { products, totalPrice, itemsCount, setItemsCount, setProductsOnCart, setTotalPrice } = useCartContext()
     
@@ -49,7 +53,7 @@ export default function CartInfo() {
     }, [products.produtos, setItemsCount, setProductsOnCart, setTotalPrice])
 
     function handleBack(){
-        router.push('/')
+        router.back()
     }
 
     return(
@@ -58,7 +62,7 @@ export default function CartInfo() {
                 <BackIcon/>
                 <p className=" text-[#737380]">Voltar</p>
             </button>
-            <h2 className="font-medium text-2xl mt-5">SEU CARRINHO</h2>
+            <h2 className="font-medium text-2xl mt-5">{tituliInfo}</h2>
             <div className="flex gap-1 mt-1">
                 <h3>{`Total (${itemsCount} ${itemsCount === 1 ? 'produto' : 'produtos'})`}</h3>
                 <h3 className="font-semibold">{`R$${totalPrice.toFixed(2)}`}</h3>

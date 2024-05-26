@@ -9,7 +9,7 @@ export default function Cart() {
             px-40 2xl:px-72 pb-24 text-[#41414D]"
         >
             <div>
-                <CartInfo/>
+                <CartInfo tituliInfo="SEU CARRINHO"/>
                 <ProductCartCard/>
             </div>
             <div>
