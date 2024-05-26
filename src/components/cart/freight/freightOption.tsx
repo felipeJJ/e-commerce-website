@@ -14,7 +14,7 @@ export const FreightOption: React.FC<OpcoesFreteProps> = ({ data, selectedOption
                 <div className="mt-4 px-3" key={option.id}>
                     <div className="flex">
                         <input
-                            className="bg-white"
+                            className="bg-white checkbox checkbox-xs mt-1"
                             type="checkbox"
                             id={`option-${option.id}`}
                             name="freightOption"
