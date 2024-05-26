@@ -1,7 +1,8 @@
+'use client'
+
 import { useCartContext } from "@/contexts/cartContext"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
 import axios from "axios"
@@ -16,13 +17,14 @@ export default function CheckoutButton(){
     function verifyEmailAcount(email: string | null | undefined){
         axios.get(`/api/userInfoApi?email=${email}` ).then(response => {
             if (response.status === 200) {
-                // router.push('/checkout')
+                sessionStorage.setItem('userData', JSON.stringify(response.data.user))
+                router.push('/checkout')
             } 
         }).catch(error => {
             if (error.response && error.response.status === 404) {
                 MySwal.fire({
                     title: "Cadastro do usuário",
-                    text: "Por favor termine o cadastro do usuário na pagina a seguir",
+                    text: "Por favor termine o cadastro do usuário na próxima página",
                     confirmButtonColor: "#3085d6"
                 }).then((result) => {
                     if (result.isConfirmed){
