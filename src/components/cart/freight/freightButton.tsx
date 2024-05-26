@@ -10,7 +10,7 @@ interface CalcularFreteButtonProps {
 export const FreightButton: React.FC<CalcularFreteButtonProps> = ({ onClick, isAnimating }) => {
     return (
         <button
-            className={`flex bg-slate-200 px-3 py-1 rounded-lg ${isAnimating ? 'sm:animate-bounce' : ''}`}
+            className={` btn border-none flex bg-slate-200 px-3 py-1 rounded-lg ${isAnimating ? 'sm:animate-bounce' : ''}`}
             onClick={onClick}
         >
             {isAnimating ? <LoadingIcon/> : <TruckIcon/>}
