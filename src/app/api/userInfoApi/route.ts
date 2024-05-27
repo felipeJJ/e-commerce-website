@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import bcrypt from "bcryptjs"
 import database from "../../../../database/lib/mongoose"
 import UserInfo from "../../../../database/schemas/userData"
-import { UserInfoData } from "../../../../types"
+import { UserAddress, UserInfoData } from "../../../../types"
 import { getServerSession } from "next-auth"
 import { handler } from "../auth/[...nextauth]/route"
 
@@ -72,6 +72,37 @@ export async function GET(req: Request) {
     } catch (error) {
         return NextResponse.json(
             { message: "Erro ao buscar usuário", error },
+            { status: 500 }
+        )
+    }
+}
+
+export async function PUT(req: Request) {
+    await database.connectMongo()
+
+    try {
+        const { email, ...addressData } = await req.json() as { email: string } & UserAddress
+
+        const user = await UserInfo.findOneAndUpdate(
+            { email },
+            { $set: addressData },
+            { new: true }
+        )
+
+        if (user) {
+            return NextResponse.json(
+                { message: "Endereço atualizado com sucesso", user },
+                { status: 200 }
+            )
+        } else {
+            return NextResponse.json(
+                { message: "Usuário não encontrado" },
+                { status: 404 }
+            )
+        }
+    } catch (error) {
+        return NextResponse.json(
+            { message: "Erro ao atualizar endereço", error },
             { status: 500 }
         )
     }
