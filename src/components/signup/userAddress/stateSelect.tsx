@@ -5,7 +5,7 @@ export default function SelectEstado() {
     const state = watch("state")
 
   return (
-        <label className="flex items-center mt-4 w-36">
+        <label className="flex items-center mt-4">
             <select
                 className="select select-bordered w-full"
                 id="state"
