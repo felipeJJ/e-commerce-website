@@ -72,3 +72,21 @@ export const signUpFormSchemaAuth = yup.object({
 
     district : yup.string().required("Campo obrigatório"),
 })
+
+export const changeAddressSchema = yup.object({
+    address: yup.string().required("Campo obrigatório"),
+
+    state: yup.string().required("Campo obrigatório"),
+
+    city: yup.string().required("Campo obrigatório"),
+
+    zip: yup.string()
+        .min(9, "CEP deve conter 8 digitos")
+        .required("Campo obrigatório"),
+
+    houseNumber: yup.string()
+    .required("Campo obrigatório")
+    .matches(/^\d{0,4}$/),
+
+    district : yup.string().required("Campo obrigatório"),
+})
