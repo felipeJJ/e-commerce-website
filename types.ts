@@ -60,6 +60,15 @@ export interface UserInfoDataAuth{
   district: string
 }
 
+export interface UserAddress {
+  state: string;
+  city: string;
+  zip: string;
+  address: string;
+  houseNumber: string;
+  district: string
+}
+
 interface Company {
   id: number;
   name: string;
