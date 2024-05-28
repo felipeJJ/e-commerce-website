@@ -31,10 +31,14 @@ export default function DeliveryAddressCard() {
     const onSubmit = async (data: UserAddress) => {
         (document.getElementById('my_modal_5') as HTMLDialogElement).close()
         try {
-            const response = await axios.put('/api/userInfoApi', { ...data }, {
+            const response = await axios.put('/api/userInfoApi', { email: userData.email, ...data }, {
                 headers: {'Content-Type': 'application/json'}
             })
             if (response.status === 200 ){
+                setUserData((prev) => ({
+                    ...prev,
+                    ...data,
+                }))
                 setSuccess(true)
                 setTimeout(()=>{
                     setSuccess(false)
