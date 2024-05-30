@@ -96,3 +96,11 @@ export interface DeliveryOption {
   additional_services: {};
   company: Company;
 }
+
+export interface creditCardData {
+  cardNumber: string;
+  expirationDate: string;
+  cvc: string;
+  cardHolderName: string;
+  userId?: string;
+}
