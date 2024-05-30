@@ -90,3 +90,21 @@ export const changeAddressSchema = yup.object({
 
     district : yup.string().required("Campo obrigatório"),
 })
+
+export const creditCardSchema = yup.object({
+    cardNumber: yup.string().required("Campo obrigatório").min(16,"número do cartão deve conter 16 digitos"),
+    expirationDate: yup.string().required("Campo obrigatório").test(
+        "expirationDate",
+        "Data de expiração deve ser uma data futura válida",
+        (value) => {
+            if(!value) return false
+            const [month, year] = value.split('/').map(Number)
+            if(month < 1 || month > 12) return false
+            const dateNow = new Date()
+            const expiryDate = new Date(year, month - 1)
+            return expiryDate > dateNow
+        }
+    ),
+    cvc: yup.string().required("Campo obrigatório").min(3,"número de segurança deve conter 3 digitos"),
+    cardHolderName: yup.string().required("Campo obrigatório"),
+})
