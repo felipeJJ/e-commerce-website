@@ -53,7 +53,18 @@ export async function POST(req: Request, res: Response) {
 
             const { cardNumber, cardHolderName, expirationDate, cvc, userId } = await req.json()
 
-            const existingCard = await CreditCard.findOne({ userId, cardNumber })
+            const cards = await CreditCard.find({ userId })
+
+            let existingCard = false
+            for (const card of cards) {
+                const ivBuffer = Buffer.from(card.iv, 'hex')
+                const decryptedCardNumber = decrypt(card.cardNumber, ivBuffer)
+
+                if (decryptedCardNumber === cardNumber) {
+                    existingCard = true
+                    break
+                }
+            }
             if (existingCard) {
                 return NextResponse.json(
                     { message: "Já existe um cartão com este número para o usuário informado." },
