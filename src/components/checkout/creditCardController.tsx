@@ -1,5 +1,5 @@
-import React from "react"
 import axios from "axios"
+import React, { useState } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { creditCardSchema } from "@/schemas/signupFormSchema"
@@ -15,6 +15,7 @@ interface CreditCardControllerProps {
 }
 
 export default function CreditCardController({ creditCards, setError, setSuccess, fetchCreditCards }: CreditCardControllerProps) {
+    const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
 
     const methods = useForm({
         resolver: yupResolver(creditCardSchema),
@@ -43,7 +44,7 @@ export default function CreditCardController({ creditCards, setError, setSuccess
                     setSuccess(false)
                 }, 3000)
             } else {
-                renderError( response.data.message )
+                renderError(response.data.message)
             }
         } catch (error: any) {
             if (error.response && error.response.status === 409) {
@@ -64,16 +65,20 @@ export default function CreditCardController({ creditCards, setError, setSuccess
     return (
         <>
             {creditCards.map((card) => (
-                <div key={card._id} className="mb-4">
+                <div 
+                    key={card._id} 
+                    className={`mb-4 ${selectedCardId === card._id ? 'border rounded-md border-gray-300 p-4' : ''}`}
+                >
                     <input
                         type="radio"
                         id={`card-${card._id}`}
                         name="selectedCard"
                         value={card._id}
                         className="mr-2 bg-white"
+                        onChange={() => setSelectedCardId(card._id as string || null)}
                     />
                     <label className="" htmlFor={`card-${card._id}`}>
-                        <span>{card.cardHolderName}</span> terminando em {card.cardNumber}
+                        <span>{card.cardHolderName}</span>, terminando em {card.cardNumber}
                     </label>
                 </div>
             ))}
@@ -82,14 +87,14 @@ export default function CreditCardController({ creditCards, setError, setSuccess
                 <a id="modal-card" className="link text-cyan-600"
                     onClick={() => (document.getElementById('my_modal_1') as HTMLDialogElement).showModal()}
                 >
-                    Adcionar um cartão de crédito
+                    Adicionar um cartão de crédito
                 </a>
                 <dialog id="my_modal_1" className="modal">
                     <div className="modal-box max-w-3xl p-6">
                         <form method="dialog">
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         </form>
-                        <h2 className="font-bold text-2xl mb-6 ">Adcionar um cartão de crédito</h2>
+                        <h2 className="font-bold text-2xl mb-6">Adicionar um cartão de crédito</h2>
                         <FormProvider {...methods}>
                             <form 
                                 onSubmit={methods.handleSubmit(onSubmit)}
