@@ -1,5 +1,6 @@
 import CartInfo from "@/components/cart/cartInfo"
 import CheckoutResume from "@/components/cart/checkout/checkoutResume"
+import CreditCardCard from "@/components/checkout/creditCardCard"
 import DeliveryAddressCard from "@/components/checkout/deliveryAddressCard"
 
 export default function Checkout() {
@@ -11,6 +12,7 @@ export default function Checkout() {
             <section className="w-3/5 h-full">
                 <CartInfo tituliInfo="FINALIZAR COMPRA"/>
                 <DeliveryAddressCard/>
+                <CreditCardCard/>
             </section>
             <section className="w-2/5 h-full flex justify-end">
             <CheckoutResume/>
