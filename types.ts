@@ -98,9 +98,11 @@ export interface DeliveryOption {
 }
 
 export interface creditCardData {
+  _id?: string;
   cardNumber: string;
   expirationDate: string;
   cvc: string;
   cardHolderName: string;
   userId?: string;
+  iv?: string;
 }
