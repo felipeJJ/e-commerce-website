@@ -17,7 +17,9 @@ export default function CreditCardForm() {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
-        setCreditCardInfo((prev) => ({ ...prev, [name]: value }))
+        setCreditCardInfo((prev) => ({ 
+            ...prev, [name]: name === "cardHolderName" ? value.toUpperCase() : value
+        }))
     }
 
     const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
