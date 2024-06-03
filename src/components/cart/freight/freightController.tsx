@@ -1,6 +1,7 @@
 import Swal from 'sweetalert2'
+import { usePathname } from 'next/navigation'
 import withReactContent from 'sweetalert2-react-content'
-import { SetStateAction, useState } from 'react'
+import { SetStateAction, useEffect, useState } from 'react'
 import { useCartContext } from '@/contexts/cartContext'
 import { DeliveryOption } from '../../../../types'
 import { FreightButton } from './freightButton'
@@ -8,6 +9,7 @@ import { FreightOption } from './freightOption'
 import { InputCEP } from './InputCep'
 
 export default function FreightController() {
+    const pathName = usePathname()
 
     const { count, setFreightValue } = useCartContext()
     const [ cep, setCep ] = useState('')
@@ -68,6 +70,22 @@ export default function FreightController() {
         setSelectedOption(option.name)
         setFreightValue(option.price)    
     }
+    
+    useEffect(() => {
+        if (pathName === '/checkout') {
+            const userDataString = sessionStorage.getItem('userData')
+            if (userDataString) {
+                try {
+                    const userData = JSON.parse(userDataString)
+                    const userAddress = userData.zip
+                    setCep(userAddress)
+                } catch (error) {
+                    console.error("Erro ao analisar userData do sessionStorage:", error)
+                }
+            }
+        }
+    }, [pathName])
+
     
     return (
         <div className="w-[352px] h-fit bg-gray-50 px-6 py-4 rounded-xl shadow-lg">

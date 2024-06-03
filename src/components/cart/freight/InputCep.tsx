@@ -25,7 +25,7 @@ export const InputCEP: React.FC<InputCEPProps> = ({ cep, onChange, onEnterPress 
     return (
         <input
             id="cep"
-            className="bg-gray-50 border-2 border-gray-100 outline-red-500 w-32 rounded-xl px-3"
+            className="bg-gray-50 border-2 border-gray-100 outline-gray-500 w-32 rounded-xl px-3"
             type="text"
             value={cep}
             onChange={handleCepChange}
