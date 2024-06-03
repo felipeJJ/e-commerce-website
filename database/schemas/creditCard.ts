@@ -6,6 +6,7 @@ const CreditCardSchema = new Schema({
         expirationDate: {type: String, required: true},
         cvc: {type: String, required: true},
         userId: {type: String, required: true},
+        iv: {type: String, required: true},
     },
     {
         timestamps: true,
