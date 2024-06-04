@@ -112,6 +112,8 @@ export async function GET(req: Request, res: Response) {
             const { searchParams } = new URL(req.url)
             const userId = searchParams.get('userId')
 
+            const shouldMask = searchParams.get('shouldMask') === 'true'
+
             if (!userId) {
                 return NextResponse.json({ message: "userId é necessário" }, { status: 400 })
             }
@@ -120,12 +122,19 @@ export async function GET(req: Request, res: Response) {
 
             const decryptedCreditCards = creditCards.map(card => {
                 const ivBuffer = Buffer.from(card.iv, 'hex')
-                return {
-                    ...card.toObject(),
-                    cardNumber: maskCardNumber(decrypt(card.cardNumber, ivBuffer)),
-                  cardHolderName: decrypt(card.cardHolderName, ivBuffer),
+                let maskedCardNumber
+
+                if (shouldMask) {
+                    maskedCardNumber = maskCardNumber(decrypt(card.cardNumber, ivBuffer))
+                } else {
+                    maskedCardNumber = decrypt(card.cardNumber, ivBuffer)
                 }
-              })
+                return {
+                   ...card.toObject(),
+                    cardNumber: maskedCardNumber,
+                    cardHolderName: decrypt(card.cardHolderName, ivBuffer),
+                }
+            })
 
             return NextResponse.json({ creditCards: decryptedCreditCards }, { status: 200 })
         } else {
@@ -138,3 +147,4 @@ export async function GET(req: Request, res: Response) {
         )
     }
 }
+

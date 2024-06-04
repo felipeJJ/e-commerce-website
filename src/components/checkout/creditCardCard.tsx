@@ -26,11 +26,13 @@ export default function CreditCardCard() {
     
     const fetchCreditCards = useCallback(async () => {
         const userId = getUserIdFromSessionStorage()
+        const shouldMask = true
+
         if (!userId) return
 
         try {
             const response = await axios.get<{ creditCards: creditCardData[] }>("/api/creditCardApi", {
-                params: { userId }
+                params: { userId, shouldMask }
             })
             setCreditCards(response.data.creditCards)
         } catch (error) {
