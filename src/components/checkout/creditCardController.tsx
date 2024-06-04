@@ -34,7 +34,7 @@ export default function CreditCardController({ creditCards, setError, setSuccess
 
             const requestData = { ...data, userId }
 
-            const response = await axios.post("/api/newCreditCardApi", requestData, {
+            const response = await axios.post("/api/creditCardApi", requestData, {
                 headers: {'Content-Type': 'application/json'}
             })
             if (response.status === 200 ){

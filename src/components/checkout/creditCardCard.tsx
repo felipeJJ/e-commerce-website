@@ -29,7 +29,7 @@ export default function CreditCardCard() {
         if (!userId) return
 
         try {
-            const response = await axios.get<{ creditCards: creditCardData[] }>("/api/newCreditCardApi", {
+            const response = await axios.get<{ creditCards: creditCardData[] }>("/api/creditCardApi", {
                 params: { userId }
             })
             setCreditCards(response.data.creditCards)
