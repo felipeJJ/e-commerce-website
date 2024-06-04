@@ -3,11 +3,21 @@
 import { useCartContext } from "@/contexts/cartContext"
 import FreightController from "../freight/freightController"
 import CheckoutButton from "./checkoutButton"
+import { useCheckoutContext } from "@/contexts/checkoutContext"
+import { useEffect } from "react"
 
 export default function CheckoutResume() {
-    const { totalPrice, freightValue} = useCartContext()
-    const formatedFreightValue = Number(freightValue.replace(',', '.'))
+    const { totalPrice, freightValue } = useCartContext()
+    const { setAmount } = useCheckoutContext()
     
+    const formatedFreightValue = Number(freightValue.replace(',', '.'))
+
+    let calcAmount = Number((totalPrice + formatedFreightValue).toFixed(2))*100
+
+    useEffect(() => {
+        setAmount(calcAmount)
+    }, [calcAmount, setAmount])
+
     return(
         <div className="mt-10">
             <FreightController/>
