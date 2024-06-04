@@ -2,6 +2,7 @@ import axios from "axios"
 import React, { useState } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useCheckoutContext } from "@/contexts/checkoutContext"
 import { creditCardSchema } from "@/schemas/signupFormSchema"
 import { creditCardData } from "../../../types"
 import CreditCardForm from "./creditCardForm"
@@ -15,7 +16,7 @@ interface CreditCardControllerProps {
 }
 
 export default function CreditCardController({ creditCards, setError, setSuccess, fetchCreditCards }: CreditCardControllerProps) {
-    const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
+    const { selectedCardId, setSelectedCardId } = useCheckoutContext()
 
     const methods = useForm({
         resolver: yupResolver(creditCardSchema),
@@ -75,7 +76,7 @@ export default function CreditCardController({ creditCards, setError, setSuccess
                         name="selectedCard"
                         value={card._id}
                         className="mr-2 bg-white"
-                        onChange={() => setSelectedCardId(card._id as string || null)}
+                        onChange={() => setSelectedCardId(card._id as string | null)}
                     />
                     <label className="" htmlFor={`card-${card._id}`}>
                         <span>{card.cardHolderName}</span>, terminando em {card.cardNumber}
