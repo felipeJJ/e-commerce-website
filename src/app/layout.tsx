@@ -7,6 +7,7 @@ import { FilterContextProvider } from "@/contexts/filterContext"
 import { CartContextProvider } from '@/contexts/cartContext'
 import '@sweetalert2/theme-bootstrap-4/bootstrap-4.css'
 import {  Saira, Saira_Stencil_One } from 'next/font/google'
+import { CheckoutContextProvider } from '@/contexts/checkoutContext'
 
 
 const sairaStencil = Saira_Stencil_One({
@@ -32,8 +33,10 @@ export default function RootLayout({
         <body className='bg-white'>
           <CartContextProvider>
             <FilterContextProvider>
+              <CheckoutContextProvider>
                 <Header></Header>
                 {children}
+              </CheckoutContextProvider>
             </FilterContextProvider>
           </CartContextProvider>
         </body>
