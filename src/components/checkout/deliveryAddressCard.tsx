@@ -64,17 +64,19 @@ export default function DeliveryAddressCard() {
     
     return (
         <div className="mt-6 bg-gray-50 rounded-xl shadow-lg">
-            <div className="flex justify-between h-fit w-full p-6">
-                <h2 className="font-medium text-lg">1</h2>
-                <h2 className="font-medium text-lg">ENDEREÇO DE ENTREGA</h2>
-                <div>
-                    <div className="flex-row pr-36 pt-1">
+            <div className="flex flex-col lg:flex-row justify-between h-fit w-full p-6">
+                <div className="flex font-medium text-lg">
+                    <h2 className="mr-10">1</h2>
+                    <h2>ENDEREÇO DE ENTREGA</h2>
+                </div>
+                <div className="flex-1 mb-2 lg:mb-0">
+                    <div className="flex flex-col ml-12 pt-1">
                         <p>{userData.name}</p>
-                        <div className="flex">
+                        <div className="flex flex-wrap">
                             <p className="mr-1">{userData.address}</p>
                             <p>{userData.houseNumber}</p>
                         </div>
-                        <div className="flex">
+                        <div className="flex flex-wrap">
                             <p>{userData.city}</p>
                             <p>, {userData.state}</p> 
                             <p className="ml-1">{userData.zip}</p>   
@@ -96,7 +98,7 @@ export default function DeliveryAddressCard() {
                                 <FormProvider {...methods}>
                                     <form method="dialog"
                                         onSubmit={methods.handleSubmit(onSubmit)}
-                                        className="flex flex-col align-middle "
+                                        className="flex flex-col align-middle"
                                     >
                                         <h2 className="font-bold text-2xl mb-2"> Atualize o endereço </h2>
                                         <UserAddressForm />
@@ -109,7 +111,7 @@ export default function DeliveryAddressCard() {
                 </div>
             </div>
             {success && (
-                 <div role="alert" className="alert alert-success h-8 flex">
+                <div role="alert" className="alert alert-success h-8 flex">
                     <svg xmlns="http://www.w3.org/2000/svg" 
                         className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"
                     >
