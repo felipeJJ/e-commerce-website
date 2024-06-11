@@ -26,3 +26,11 @@ button.swal2-confirm {
 .collapse-arrow .collapse-arrow:after {
     --tw-translate-y: -300%;
 }
+
+.input  {
+    background-color: white
+}
+
+.select  {
+    background-color: white
+}
