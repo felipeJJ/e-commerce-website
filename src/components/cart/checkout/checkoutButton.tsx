@@ -10,9 +10,9 @@ import Swal from "sweetalert2"
 import axios from "axios"
 
 export default function CheckoutButton(){
-    const { itemsCount, freightValue} = useCartContext()
+    const { itemsCount, freightValue } = useCartContext()
     const { amount, selectedCardId, setTransactionStatus } = useCheckoutContext()
-    const {data: session} = useSession()
+    const { data: session } = useSession()
     const router = useRouter()
     const pathName = usePathname()
     
@@ -62,9 +62,9 @@ export default function CheckoutButton(){
         const cardId = selectedCardId
 
         try {
-            const response = await axios.post<ApiResponse>("/api/cieloApi", { userId, amount, cardId})
+            const response = await axios.post<ApiResponse>("/api/cieloApi", { userId, amount, cardId })
             if(response.status === 200){
-                if(response.data.Payment.ReturnCode === "4" || "6"){
+                if(response.data.Payment.ReturnCode === "4" || response.data.Payment.ReturnCode === "6"){
                     setTransactionStatus("authorized")
                 } else {
                     setTransactionStatus("unauthorized")
@@ -80,8 +80,9 @@ export default function CheckoutButton(){
         if(session){
             if(pathName === "/checkout"){
                 handleSubmit()
+            } else {
+                verifyEmailAcount(session.user?.email)
             }
-            verifyEmailAcount(session.user?.email)
         } else {
             MySwal.fire({
                 title: "Nenhum usuário!",
@@ -99,9 +100,16 @@ export default function CheckoutButton(){
         buttonName = "FINALIZAR"
     }
 
+    const isButtonDisabled = () => {
+        if (pathName === '/checkout') {
+            return !itemsCount || !selectedCardId || !freightValue
+        }
+        return !itemsCount
+    }
+
     return(
         <button 
-            disabled={!itemsCount || !selectedCardId || !freightValue}
+            disabled={isButtonDisabled()}
             onClick={handleCheckout}
             className="w-[304px] h-11 mt-10 bg-[#51B853] text-white rounded-lg">
             {buttonName}
