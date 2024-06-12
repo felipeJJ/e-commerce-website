@@ -11,7 +11,7 @@ import axios from "axios"
 
 export default function CheckoutButton(){
     const { itemsCount, freightValue } = useCartContext()
-    const { amount, selectedCardId, setTransactionStatus } = useCheckoutContext()
+    const { amount, selectedCardId, setTransactionStatus, setUserId, } = useCheckoutContext()
     const { data: session } = useSession()
     const router = useRouter()
     const pathName = usePathname()
@@ -59,6 +59,7 @@ export default function CheckoutButton(){
 
     async function handleSubmit(){
         const userId = getUserIdFromSessionStorage()
+        setUserId(userId)
         const cardId = selectedCardId
 
         try {
