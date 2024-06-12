@@ -106,3 +106,53 @@ export interface creditCardData {
   userId?: string;
   iv?: string;
 }
+
+export interface Link {
+  Method: string;
+  Rel: string;
+  Href: string;
+}
+
+export interface CreditCard {
+  CardNumber: string;
+  Holder: string;
+  ExpirationDate: string;
+  SaveCard: boolean;
+  Brand: string;
+}
+
+export interface Payment {
+  ServiceTaxAmount: number;
+  Installments: number;
+  Interest: number;
+  Capture: boolean;
+  Authenticate: boolean;
+  Recurrent: boolean;
+  CreditCard: CreditCard;
+  Tid: string;
+  SoftDescriptor: string;
+  Provider: string;
+  NewCard: CreditCard;
+  IsQrCode: boolean;
+  Amount: number;
+  ReceivedDate: string;
+  Status: number;
+  IsSplitted: boolean;
+  ReturnMessage: string;
+  ReturnCode: string;
+  PaymentId: string;
+  Type: string;
+  Currency: string;
+  Country: string;
+  Links: Link[];
+}
+
+export interface Customer {
+  Name: string;
+}
+
+export interface ApiResponse {
+  MerchantOrderId: string;
+  Customer: Customer;
+  Payment: Payment;
+}
