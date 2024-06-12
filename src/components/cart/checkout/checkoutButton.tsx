@@ -5,12 +5,13 @@ import { useCartContext } from "@/contexts/cartContext"
 import { usePathname, useRouter } from "next/navigation"
 import withReactContent from "sweetalert2-react-content"
 import { useSession } from "next-auth/react"
+import { ApiResponse } from "../../../../types"
 import Swal from "sweetalert2"
 import axios from "axios"
 
 export default function CheckoutButton(){
-    const { itemsCount } = useCartContext()
-    const { amount, selectedCardId } = useCheckoutContext()
+    const { itemsCount, freightValue} = useCartContext()
+    const { amount, selectedCardId, setTransactionStatus } = useCheckoutContext()
     const {data: session} = useSession()
     const router = useRouter()
     const pathName = usePathname()
@@ -61,12 +62,17 @@ export default function CheckoutButton(){
         const cardId = selectedCardId
 
         try {
-            const response = await axios.post("/api/cieloApi", { userId, amount, cardId})
-            console.log(response.data)
-            // Trate a resposta conforme necessário
+            const response = await axios.post<ApiResponse>("/api/cieloApi", { userId, amount, cardId})
+            if(response.status === 200){
+                if(response.data.Payment.ReturnCode === "4" || "6"){
+                    setTransactionStatus("authorized")
+                } else {
+                    setTransactionStatus("unauthorized")
+                }
+            }
         } catch (error) {
             console.error("Erro ao finalizar a compra:", error)
-            // Trate o erro conforme necessário
+            setTransactionStatus("error")
         }   
     }
 
@@ -95,7 +101,7 @@ export default function CheckoutButton(){
 
     return(
         <button 
-            disabled={!itemsCount}
+            disabled={!itemsCount || !selectedCardId || !freightValue}
             onClick={handleCheckout}
             className="w-[304px] h-11 mt-10 bg-[#51B853] text-white rounded-lg">
             {buttonName}
