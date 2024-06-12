@@ -63,9 +63,10 @@ export default function CheckoutButton(){
         const cardId = selectedCardId
 
         try {
-            const response = await axios.post<ApiResponse>("/api/cieloApi", { userId, amount, cardId })
+            const response = await axios.post<{ message: string, response: ApiResponse }>("/api/cieloApi", { userId, amount, cardId })
             if(response.status === 200){
-                if(response.data.Payment.ReturnCode === "4" || response.data.Payment.ReturnCode === "6"){
+                const data: ApiResponse = response.data.response
+                if(data.Payment.ReturnCode === "4" || data.Payment.ReturnCode === "6"){
                     setTransactionStatus("authorized")
                 } else {
                     setTransactionStatus("unauthorized")
