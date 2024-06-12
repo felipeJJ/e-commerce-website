@@ -10,6 +10,8 @@ import {
 interface CheckoutContextType {
     selectedCardId: string | null 
     amount: number 
+    transactionStatus: string | null 
+    setTransactionStatus: Dispatch < SetStateAction < string | null >>
     setAmount: Dispatch<SetStateAction<number>> 
     setSelectedCardId: Dispatch < SetStateAction < string | null >>
 }
@@ -17,7 +19,8 @@ interface CheckoutContextType {
 const CheckoutContext = createContext<CheckoutContextType>({
     selectedCardId: null,
     amount: 0,
-
+    transactionStatus: null,
+    setTransactionStatus: () => {},
     setAmount: () => {},
     setSelectedCardId: () => {}
 })
@@ -32,6 +35,7 @@ interface ProviderProps {
 
 export function CheckoutContextProvider({children} : ProviderProps) {
     const [selectedCardId, setSelectedCardId] = useState < string | null > (null)
+    const [transactionStatus, setTransactionStatus] = useState < string | null > (null)
     const [amount, setAmount] = useState(0)
 
     return (
@@ -39,6 +43,8 @@ export function CheckoutContextProvider({children} : ProviderProps) {
             value={{
                 selectedCardId,
                 amount,
+                transactionStatus, 
+                setTransactionStatus,
                 setAmount,
                 setSelectedCardId
             }}>
