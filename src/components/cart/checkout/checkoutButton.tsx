@@ -11,7 +11,7 @@ import axios from "axios"
 
 export default function CheckoutButton(){
     const { itemsCount, freightValue } = useCartContext()
-    const { amount, selectedCardId, setTransactionStatus, setUserId, } = useCheckoutContext()
+    const { amount, selectedCardId, setTransactionStatus, setUserId, setPayment } = useCheckoutContext()
     const { data: session } = useSession()
     const router = useRouter()
     const pathName = usePathname()
@@ -68,6 +68,7 @@ export default function CheckoutButton(){
                 const data: ApiResponse = response.data.response
                 if(data.Payment.ReturnCode === "4" || data.Payment.ReturnCode === "6"){
                     setTransactionStatus("authorized")
+                    setPayment(data.Payment)
                 } else {
                     setTransactionStatus("unauthorized")
                 }
