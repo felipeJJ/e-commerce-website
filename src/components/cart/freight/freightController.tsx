@@ -13,7 +13,7 @@ export default function FreightController() {
     const pathName = usePathname()
 
     const { count, setFreightValue } = useCartContext()
-    const { setFreight } = useCheckoutContext()
+    const { setFreight, setUserData } = useCheckoutContext()
 
     const [ cep, setCep ] = useState('')
     const [ hideInfo, setHideInfo ] = useState(true)
@@ -85,6 +85,7 @@ export default function FreightController() {
             if (userDataString) {
                 try {
                     const userData = JSON.parse(userDataString)
+                    setUserData(userData)
                     const userAddress = userData.zip
                     setCep(userAddress)
                 } catch (error) {
@@ -92,7 +93,7 @@ export default function FreightController() {
                 }
             }
         }
-    }, [pathName])
+    }, [pathName, setUserData])
 
     
     return (
