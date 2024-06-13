@@ -2,6 +2,7 @@ import Swal from 'sweetalert2'
 import { usePathname } from 'next/navigation'
 import withReactContent from 'sweetalert2-react-content'
 import { SetStateAction, useEffect, useState } from 'react'
+import { useCheckoutContext } from '@/contexts/checkoutContext'
 import { useCartContext } from '@/contexts/cartContext'
 import { DeliveryOption } from '../../../../types'
 import { FreightButton } from './freightButton'
@@ -12,6 +13,8 @@ export default function FreightController() {
     const pathName = usePathname()
 
     const { count, setFreightValue } = useCartContext()
+    const { setFreight } = useCheckoutContext()
+
     const [ cep, setCep ] = useState('')
     const [ hideInfo, setHideInfo ] = useState(true)
     const [ isAnimating, setIsAnimating ] = useState(false)
@@ -68,7 +71,12 @@ export default function FreightController() {
     const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const option: DeliveryOption = JSON.parse(event.target.value)
         setSelectedOption(option.name)
-        setFreightValue(option.price)    
+        setFreightValue(option.price)   
+        setFreight({
+            freightValue: option.price,
+            freightName: option.name,
+            freightDeliveryTime: String(option.delivery_time),
+        })
     }
     
     useEffect(() => {
