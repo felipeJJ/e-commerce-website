@@ -1,22 +1,30 @@
 'use client'
 
 import { useCartContext } from "@/contexts/cartContext"
-import FreightController from "../freight/freightController"
-import CheckoutButton from "./checkoutButton"
 import { useCheckoutContext } from "@/contexts/checkoutContext"
-import { useEffect } from "react"
+import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
+import CheckoutButton from "@/components/checkout/checkoutButton"
+import FreightController from "../freight/freightController"
+import CartButton from "./cartButton"
 
 export default function CheckoutResume() {
+    const [isCheckout, setIsCheckout] = useState(false)
+
     const { totalPrice, freightValue } = useCartContext()
     const { setAmount } = useCheckoutContext()
+    const pathName = usePathname()
     
     const formatedFreightValue = Number(freightValue.replace(',', '.'))
 
     let calcAmount = Number((totalPrice + formatedFreightValue).toFixed(2))*100
 
     useEffect(() => {
+        if(pathName === "/checkout"){
+            setIsCheckout(true)
+        }
         setAmount(calcAmount)
-    }, [calcAmount, setAmount])
+    }, [calcAmount, pathName, setAmount])
 
     return(
         <div className="mt-10">
@@ -36,7 +44,7 @@ export default function CheckoutResume() {
                     <p>Totoal</p>
                     <p>{(totalPrice + formatedFreightValue).toFixed(2)}</p>
                 </div>
-                <CheckoutButton/>
+                {isCheckout? <CheckoutButton/> : <CartButton/>}
             </div>
         </div>
     )
