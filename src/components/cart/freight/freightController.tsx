@@ -98,7 +98,13 @@ export default function FreightController() {
     
     return (
         <div className=" w-full h-auto md:flex-row md:w-[352px] md:h-fit bg-gray-50 px-6 py-4 rounded-xl shadow-lg">
-            <p className="text-xl font-semibold">FRETE E PRAZOS</p>
+            {pathName === '/checkout' ? 
+                <div className="flex font-medium text-lg">
+                    <h2 className="mr-10">3</h2>
+                    <h2>FFRETE E PRAZOS</h2>
+                </div> : 
+                <p className="text-xl font-semibold">FRETE E PRAZOS</p>
+            }
             <div className="flex mt-4 first-letter justify-between">
                 <InputCEP cep={cep} onChange={handleCepChange}  onEnterPress={handleSubmit}/>
                 <FreightButton onClick={handleSubmit} isAnimating={isAnimating}/>
