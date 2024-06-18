@@ -1,5 +1,5 @@
 import axios from "axios"
-import React, { useState } from "react"
+import React from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useCheckoutContext } from "@/contexts/checkoutContext"
@@ -63,6 +63,14 @@ export default function CreditCardController({ creditCards, setError, setSuccess
         }, 6000)
     }
 
+    const handleCheckboxChange = (cardId: string) => {
+        if (selectedCardId === cardId) {
+            setSelectedCardId(null)
+        } else {
+            setSelectedCardId(cardId)
+        }
+    }
+
     return (
         <>
             {creditCards.map((card) => (
@@ -71,12 +79,13 @@ export default function CreditCardController({ creditCards, setError, setSuccess
                     className={`mb-4 ${selectedCardId === card._id ? 'border rounded-md border-gray-300 p-4' : ''}`}
                 >
                     <input
-                        type="radio"
+                        type="checkbox"
                         id={`card-${card._id}`}
                         name="selectedCard"
                         value={card._id}
-                        className="mr-2 bg-white"
-                        onChange={() => setSelectedCardId(card._id as string | null)}
+                        className="mr-2 bg-white checkbox checkbox-xs"
+                        checked={selectedCardId === card._id}
+                        onChange={() => handleCheckboxChange(card._id as string)}
                     />
                     <label className="" htmlFor={`card-${card._id}`}>
                         <span>{card.cardHolderName}</span>, terminando em {card.cardNumber}
