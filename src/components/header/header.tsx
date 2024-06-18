@@ -18,7 +18,7 @@ export default function Header() {
             md:px-[160px] shadow-md space-y-4 md:space-y-0"
         >
             <Logo />
-            <div className="flex flex-row w-full justify-between font-serif items-center px-8 space-y-4 md:space-y-0 md:space-x-4">
+            <div className="flex flex-row w-full justify-between font-serif items-center md:px-8 px-2 space-y-4 md:space-y-0 md:space-x-4">
                 <SarchBar />
                 <Login />
                 <button onClick={handleCart} className="flex ml-1 mr-3 sm:ml-4">

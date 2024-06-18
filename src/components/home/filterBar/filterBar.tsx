@@ -16,7 +16,7 @@ export default function FilterBar() {
                 </div> 
             </section>
             <section className="font-serif text-[#737380] h-20 block lg:hidden">
-                <div className="flex justify-between ">
+                <div className="flex justify-between gap-4 ">
                     <FilterCategory/> 
                     <OrganizerSelection/>
                 </div>
