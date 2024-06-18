@@ -9,25 +9,17 @@ export default function SarchBar() {
         setSearch(event.target.value)
     }
 
-    return(
-        <div className="flex bg-gray-100 h-11 w-52 py-2 px-3 rounded-lg sm:w-[359px]">
+    return (
+        <div className="flex bg-gray-100 h-11 w-40 sm:w-80 md:w-96 lg:w-[359px] py-2 px-3 rounded-lg">
             <input
                 name="search-bar"
                 type="text" 
                 value={search}
-                className="outline-none bg-gray-100 w-[296px] pr-20 hidden sm:block" 
-                placeholder='Procura por algo específico'
+                className="outline-none bg-gray-100 w-full pr-20" 
+                placeholder={window.innerWidth < 640 ? 'pesquise' : 'Procura por algo específico'}
                 onChange={handleSearch}
             />
-            <input
-                name="search-bar"
-                type="text" 
-                value={search}
-                className="outline-none bg-gray-100 w-40 sm:hidden" 
-                placeholder='pesquise'
-                onChange={handleSearch}
-            />
-            <SarchIcon/>
+            <SarchIcon />
         </div>
     )
 }
