@@ -13,16 +13,25 @@ export async function POST(req: Request, res: Response){
 
             const { userId, products, freight, payment, status, shippingAddress } = await req.json()
 
-            await PurchaseOrders.create(userId, products, freight, payment, status, shippingAddress)
-
+            const newOrder = {
+                userId,
+                products,
+                freight,
+                payment,
+                status,
+                shippingAddress
+            }
+            await PurchaseOrders.create(newOrder).catch(error => {
+                throw new Error('Erro ao registrar nova compra!')
+            })
             return NextResponse.json(
                 { message: "Usuário criado com susseco!",  },
                 { status: 200 }
             )
         }
-    } catch (error) {
+    } catch (error: any) {
         return NextResponse.json(
-            { message: "Erro ao registrar nova compra!", error },
+            { message: error.message },
             { status: 500 }
         )
     }
