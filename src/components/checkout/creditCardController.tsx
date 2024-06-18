@@ -91,7 +91,7 @@ export default function CreditCardController({ creditCards, setError, setSuccess
                     Adicionar um cartão de crédito
                 </a>
                 <dialog id="my_modal_1" className="modal">
-                    <div className="modal-box max-w-3xl p-6 bg-white">
+                    <div className="modal-box max-w-full md:max-w-3xl p-6 bg-white">
                         <form method="dialog">
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                         </form>
@@ -103,7 +103,7 @@ export default function CreditCardController({ creditCards, setError, setSuccess
                                 method="dialog"
                             >
                                 <CreditCardForm/>
-                                <button className="btn btn-success w-2/4 mt-6 mx-auto" type="submit">Submit</button>
+                                <button className="btn btn-success w-full md:w-2/4 mt-6 mx-auto" type="submit">Submit</button>
                             </form>
                         </FormProvider>
                     </div>

@@ -9,7 +9,7 @@ export default function CreditCardCard() {
     const [creditCards, setCreditCards] = useState<creditCardData[]>([])
     const [error, setError] = useState("")
     const [success, setSuccess] = useState(false)
-    
+
     const getUserIdFromSessionStorage = () => {
         const userData = sessionStorage.getItem('userData')
         if (userData) {
@@ -23,7 +23,7 @@ export default function CreditCardCard() {
         }
         return null
     }
-    
+
     const fetchCreditCards = useCallback(async () => {
         const userId = getUserIdFromSessionStorage()
         const shouldMask = true
@@ -45,7 +45,7 @@ export default function CreditCardCard() {
     }, [fetchCreditCards])
 
     return (
-        <div className="h-fit w-full mt-6 p-6 bg-gray-50 rounded-xl shadow-lg">
+        <div className="h-fit w-full mt-6 p-6  bg-gray-50 rounded-xl shadow-lg">
             <details className="collapse collapse-arrow">
                 <summary className="collapse-title bg-gray-50">
                     <div className="flex font-medium text-lg">
@@ -63,7 +63,7 @@ export default function CreditCardCard() {
                 </div>
             </details>
             {success && (
-                 <div role="alert" className="alert alert-success h-8 flex">
+                <div role="alert" className="alert alert-success h-8 flex">
                     <svg xmlns="http://www.w3.org/2000/svg" 
                         className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"
                     >
@@ -87,7 +87,7 @@ export default function CreditCardCard() {
                     </svg>
                     <span>{error}</span>
                 </div>
-            )}       
+            )}
         </div>
     )
 }

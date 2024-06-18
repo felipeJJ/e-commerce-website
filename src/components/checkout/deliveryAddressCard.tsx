@@ -65,11 +65,11 @@ export default function DeliveryAddressCard() {
     return (
         <div className="mt-6 bg-gray-50 rounded-xl shadow-lg">
             <div className="flex flex-col lg:flex-row justify-between h-fit w-full p-6">
-                <div className="flex font-medium text-lg">
+                <div className="flex font-medium text-lg mb-4 lg:mb-0">
                     <h2 className="mr-10">1</h2>
                     <h2>ENDEREÇO DE ENTREGA</h2>
                 </div>
-                <div className="flex-1 mb-2 lg:mb-0">
+                <div className="flex-1 mb-4 lg:mb-0">
                     <div className="flex flex-col ml-12 pt-1">
                         <p>{userData.name}</p>
                         <div className="flex flex-wrap">
@@ -120,7 +120,7 @@ export default function DeliveryAddressCard() {
                             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                     </svg>
-                    <span>Enderço salvo com sucesso</span>
+                    <span>Endereço salvo com sucesso</span>
                 </div>
             )}
             {error && (
