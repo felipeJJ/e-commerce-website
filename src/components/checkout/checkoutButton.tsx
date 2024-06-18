@@ -85,7 +85,7 @@ export default function CheckoutButton() {
             toast: true,
             position: "center",
             showConfirmButton: false,
-            timer: 10000,
+            timer: 5000,
             timerProgressBar: true,
             didOpen: (toast) => {
                 toast.addEventListener('mouseenter', Swal.stopTimer)
