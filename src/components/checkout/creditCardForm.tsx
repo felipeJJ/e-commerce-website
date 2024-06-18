@@ -8,19 +8,25 @@ import ExclamationIcon from './exclamationIcon'
 type Focused = "cardHolderName" | "cardNumber" | "expirationDate" | "cvc" | "" | undefined
 
 export default function CreditCardForm() {
-    const [creditCardInfo, setCreditCardInfo] = useState({
+    const [creditCardInfo, setCreditCardInfo] = useState<{
+        cardNumber: string
+        expirationDate: string
+        cvc: string
+        cardHolderName: string
+        focus: Focused
+    }>({
         cardNumber: "",
         expirationDate: "",
         cvc: "",
         cardHolderName: "",
-        focus: undefined as Focused
+        focus: undefined
     })
 
     const { register, formState: { errors }, setValue } = useFormContext()
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
-        setCreditCardInfo((prev) => ({ 
+        setCreditCardInfo((prev) => ({
             ...prev, [name]: name === "cardHolderName" ? value.toUpperCase() : value
         }))
     }
@@ -31,7 +37,7 @@ export default function CreditCardForm() {
             cardHolderName: "cardHolderName",
             expirationDate: "expirationDate",
             cvc: "cvc"
-        };
+        }
         setCreditCardInfo((prev) => ({ ...prev, focus: focusMap[e.target.name] }))
     }
 
