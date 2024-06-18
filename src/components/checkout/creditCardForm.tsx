@@ -5,13 +5,15 @@ import InputMask from '@mona-health/react-input-mask'
 import { useFormContext } from 'react-hook-form'
 import ExclamationIcon from './exclamationIcon'
 
+type Focused = "cardHolderName" | "cardNumber" | "expirationDate" | "cvc" | "" | undefined
+
 export default function CreditCardForm() {
     const [creditCardInfo, setCreditCardInfo] = useState({
         cardNumber: "",
         expirationDate: "",
         cvc: "",
         cardHolderName: "",
-        focus: "" as "cardHolderName" | "cardNumber" | "expirationDate" | "cvc" | ""
+        focus: undefined as Focused
     })
 
     const { register, formState: { errors }, setValue } = useFormContext()
@@ -24,7 +26,13 @@ export default function CreditCardForm() {
     }
 
     const handleInputFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-        setCreditCardInfo((prev) => ({ ...prev, focus: e.target.name as "cardHolderName" | "cardNumber" | "expirationDate" | "cvc" }))
+        const focusMap: { [key: string]: Focused } = {
+            cardNumber: "cardNumber",
+            cardHolderName: "cardHolderName",
+            expirationDate: "expirationDate",
+            cvc: "cvc"
+        };
+        setCreditCardInfo((prev) => ({ ...prev, focus: focusMap[e.target.name] }))
     }
 
     return (
@@ -95,7 +103,7 @@ export default function CreditCardForm() {
                     <ExclamationIcon/>
                     <div>
                         <p className="text-sm text-red-700 ">VALIDAÇÃO SANDBOX:</p>
-                        <p className="text-sm">Apenas cartões com final 0/1/4 teram transação AUTORIZADA</p>
+                        <p className="text-sm">Apenas cartões com final 0/1/4 terão transação AUTORIZADA</p>
                     </div>
                 </div>
             </div>
