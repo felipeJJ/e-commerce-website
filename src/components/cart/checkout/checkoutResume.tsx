@@ -39,7 +39,7 @@ export default function CheckoutResume() {
                     <p>Entrega</p>
                     <p>R$ {formatedFreightValue.toFixed(2)}</p>
                 </div>
-                <div className="w-[304px] h-[1px] bg-[#DCE2E5] mt-6"></div>     
+                <div className="sm:w-[304px] h-[1px] bg-[#DCE2E5] mt-6"></div>     
                 <div className="flex justify-between mt-4">
                     <p>Totoal</p>
                     <p>{(totalPrice + formatedFreightValue).toFixed(2)}</p>
