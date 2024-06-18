@@ -10,6 +10,36 @@ import { creditCardData } from "../../../../types"
 dotenv.config()
 
 export async function POST(req: Request, res: Response) {
+    function decrypt(encryptedText: string, iv: Buffer): string {
+        if (!process.env.CRYPTO_SECRET_KEY) {
+            throw new Error('Variável de ambiente CRYPTO_SECRET_KEY não está definida.')
+        }
+        const key = Buffer.from(process.env.CRYPTO_SECRET_KEY)
+        const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv)
+        let decrypted = decipher.update(encryptedText, 'hex', 'utf8')
+        decrypted += decipher.final('utf8')
+        return decrypted
+    }
+    
+    async function getCardData(userId: string, cardId: string): Promise<creditCardData> {
+        await database.connectMongo()
+    
+        const creditCard = await CreditCard.findOne({ _id: cardId, userId })
+        if (!creditCard) {
+            throw new Error('Cartão de crédito não encontrado.')
+        }
+    
+        const ivBuffer = Buffer.from(creditCard.iv, 'hex')
+        const decryptedCardNumber = decrypt(creditCard.cardNumber, ivBuffer)
+        const decryptedCardHolderName = decrypt(creditCard.cardHolderName, ivBuffer)
+    
+        return {
+            cardNumber: decryptedCardNumber,
+            expirationDate: creditCard.expirationDate,
+            cvc: creditCard.cvc,
+            cardHolderName: decryptedCardHolderName,
+        }
+    }
     const { userId, cardId ,amount } = await req.json()
 
     const orderId = generateUniqueId({
@@ -70,36 +100,5 @@ export async function POST(req: Request, res: Response) {
             { message: "Erro ao solicitar pagamento", error: errorMessage },
             { status: 500 }
         )
-    }
-}
-
-function decrypt(encryptedText: string, iv: Buffer): string {
-    if (!process.env.CRYPTO_SECRET_KEY) {
-        throw new Error('Variável de ambiente CRYPTO_SECRET_KEY não está definida.')
-    }
-    const key = Buffer.from(process.env.CRYPTO_SECRET_KEY)
-    const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv)
-    let decrypted = decipher.update(encryptedText, 'hex', 'utf8')
-    decrypted += decipher.final('utf8')
-    return decrypted
-}
-
-export async function getCardData(userId: string, cardId: string): Promise<creditCardData> {
-    await database.connectMongo()
-
-    const creditCard = await CreditCard.findOne({ _id: cardId, userId })
-    if (!creditCard) {
-        throw new Error('Cartão de crédito não encontrado.')
-    }
-
-    const ivBuffer = Buffer.from(creditCard.iv, 'hex')
-    const decryptedCardNumber = decrypt(creditCard.cardNumber, ivBuffer)
-    const decryptedCardHolderName = decrypt(creditCard.cardHolderName, ivBuffer)
-
-    return {
-        cardNumber: decryptedCardNumber,
-        expirationDate: creditCard.expirationDate,
-        cvc: creditCard.cvc,
-        cardHolderName: decryptedCardHolderName,
     }
 }
