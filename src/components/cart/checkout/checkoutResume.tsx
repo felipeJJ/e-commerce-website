@@ -29,7 +29,7 @@ export default function CheckoutResume() {
     return(
         <div className="mt-10">
             <FreightController/>
-            <div className=" w-[352px] h-[330px] bg-gray-50 mt-3 px-6 py-6 rounded-xl shadow-lg">
+            <div className="w-full h-auto md:flex-row md:w-[352px] md:h-[330px] bg-gray-50 mt-3 px-6 py-6 rounded-xl shadow-lg">
                 <h1 className="text-xl font-semibold ">RESUMO DO PEDIDO</h1>
                 <div className="flex justify-between mt-7">
                     <p>Subtotal</p>

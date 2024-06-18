@@ -97,7 +97,7 @@ export default function FreightController() {
 
     
     return (
-        <div className="w-[352px] h-fit bg-gray-50 px-6 py-4 rounded-xl shadow-lg">
+        <div className=" w-full h-auto md:flex-row md:w-[352px] md:h-fit bg-gray-50 px-6 py-4 rounded-xl shadow-lg">
             <p className="text-xl font-semibold">FRETE E PRAZOS</p>
             <div className="flex mt-4 first-letter justify-between">
                 <InputCEP cep={cep} onChange={handleCepChange}  onEnterPress={handleSubmit}/>
