@@ -97,7 +97,7 @@ export default function CreditCardForm() {
                 </label>
                 <p className="text-sm text-red-800 pl-2 mt-1">{errors.cvc?.message as string}</p>
             </div>
-            <div className="mt-4 md:mt-0 md:ml-5 flex justify-center w-full md:w-1/2">
+            <div className="mt-4 md:mt-0 md:ml-5 md:w-1/2">
                 <Cards
                     number={creditCardInfo.cardNumber.replace(/\s/g, '')}
                     expiry={creditCardInfo.expirationDate}
@@ -105,12 +105,12 @@ export default function CreditCardForm() {
                     name={creditCardInfo.cardHolderName}
                     focused={creditCardInfo.focus}
                 />
-            </div>
-            <div className="mt-1 flex gap-1 md:ml-5">
-                <ExclamationIcon/>
-                <div>
-                    <p className="text-sm text-red-700">VALIDAÇÃO SANDBOX:</p>
-                    <p className="text-sm">Apenas cartões com final 0/1/4 terão transação AUTORIZADA</p>
+                <div className="mt-3 flex gap-1 md:ml-5">
+                    <ExclamationIcon/>
+                    <div>
+                        <p className="text-sm text-red-700">VALIDAÇÃO SANDBOX:</p>
+                        <p className="text-sm">Apenas cartões com final 0/1/4 terão transação AUTORIZADA</p>
+                    </div>
                 </div>
             </div>
         </div>

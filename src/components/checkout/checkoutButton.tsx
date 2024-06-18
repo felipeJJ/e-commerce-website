@@ -139,7 +139,7 @@ export default function CheckoutButton() {
         <button
             disabled={!selectedCardId ||!freightValue}
             onClick={handleSubmit}
-            className="sm:w-[304px] w-full h-11 mt-10 bg-[#51B853] text-white rounded-lg">
+            className="btn border-0 sm:w-[304px] w-full h-11 mt-10 bg-[#51B853] text-white rounded-lg">
             FINALIZAR
         </button>
     )
